@@ -9,9 +9,9 @@ public class Hero_1_UserControl : MonoBehaviour
 	private Vector3 m_CamForward;             // The current forward direction of the camera
 	private Vector3 m_Move;
 	private bool m_Jump;                      // the world-relative desired move direction, calculated from the camForward and user input.
-	private bool m_Attack;                    // the attack state
-	private bool m_Skill_1;                   // the skill_1 state
-	private bool m_Skill_2;                   // the skill_2 state
+	private bool m_Atk01;                    // the attack state
+	private bool m_Atk02;                   // the skill_1 state
+	private bool m_Atk03;                   // the skill_2 state
 	private bool m_Posture;                   // the defensive posture and wind shield state
 
 
@@ -52,10 +52,10 @@ public class Hero_1_UserControl : MonoBehaviour
 		float h = CrossPlatformInputManager.GetAxis("Horizontal");
 //			float v = CrossPlatformInputManager.GetAxis("Vertical");
 		bool crouch = Input.GetKey(KeyCode.LeftControl);
-		bool m_Attack = CrossPlatformInputManager.GetButtonDown("Fire1");
-		bool m_Skill_1 = CrossPlatformInputManager.GetButtonDown("Fire2");
-		bool m_Skill_2 = CrossPlatformInputManager.GetButtonDown("Fire3");
-		bool m_Posture = CrossPlatformInputManager.GetButtonDown("Defense");
+		m_Atk01 = CrossPlatformInputManager.GetButtonDown("Fire1");
+		m_Atk02 = CrossPlatformInputManager.GetButtonDown("Fire2");
+		m_Atk03 = CrossPlatformInputManager.GetButtonDown("Fire3");
+		m_Posture = CrossPlatformInputManager.GetButtonDown("Defense");
 		
 		// calculate move direction to pass to character
 		if (m_Cam != null)
@@ -78,7 +78,7 @@ public class Hero_1_UserControl : MonoBehaviour
 		#endif
 		
 		// pass all parameters to the character control script
-		m_Character.Move(m_Move, crouch, m_Jump, m_Attack, m_Skill_1, m_Skill_2, m_Posture);
+		m_Character.Move(m_Move, crouch, m_Jump, m_Atk01, m_Atk02, m_Atk03, m_Posture);
 		m_Jump = false;
 	}
 

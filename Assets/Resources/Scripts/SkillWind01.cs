@@ -4,7 +4,7 @@ using System.Collections;
 public class SkillWind01 : MonoBehaviour {
 
 	int power = 10;
-	private Ennemy01 ennemy01;
+	private Enemy01 ennemy01;
 	// Use this for initialization
 	void Start () {
 		StartCoroutine (timerDestroy());
@@ -19,12 +19,12 @@ public class SkillWind01 : MonoBehaviour {
 	
 	void OnTriggerEnter (Collider col)
 	{
-		if(col.gameObject.tag == "Ennemy")
+		if(col.gameObject.tag == "Enemy")
 		{
 			Rigidbody body = col.gameObject.GetComponent<Rigidbody>();
 
-			col.gameObject.GetComponent<Ennemy01>().Levitate();
-			col.gameObject.GetComponent<Ennemy01>().LooseLife(power);
+			col.gameObject.GetComponent<Enemy01>().Levitate();
+			col.gameObject.GetComponent<Enemy01>().LooseLife(power);
 
 //			otherObject.GetComponent<ThisHasABoolean>().onOrOff = true;
 		}

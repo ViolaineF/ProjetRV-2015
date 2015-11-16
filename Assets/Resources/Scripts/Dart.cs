@@ -5,6 +5,7 @@ public class Dart : MonoBehaviour {
 	public AudioClip[] SFx;
 	public int Nsound;
 	AudioSource SourceSFx;
+	int power = 10;
 
 	// Use this for initialization
 	void Start () {
@@ -15,9 +16,9 @@ public class Dart : MonoBehaviour {
 
 	void OnCollisionEnter (Collision col)
 	{
-		if(col.gameObject.tag == "Ennemy")
+		if(col.gameObject.tag == "Enemy")
 		{
-			Destroy(col.gameObject);
+			col.gameObject.GetComponent<Enemy01>().LooseLife(power);
 			Destroy (this.gameObject);
 			SourceSFx.clip = SFx [5];
 
