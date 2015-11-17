@@ -9,23 +9,12 @@ public class HUD : MonoBehaviour {
 
 	public RectTransform healthTransform;
 	private float cachedY;
-	private float health_minXValue;
-	private float health_maxXValue;
+	private float minXValue;
+	private float maxXValue;
 	public Text healthText;
 	public int currentHealth;
-	public int maxHealth;
-	public Text visualHealth;
-
-	public GameObject player;
-	// Use this for initialization
-	void Start () {
-		cachedY = healthTransform.position.y;
-		health_maxXValue = healthTransform.position.x;
-		health_minXValue = healthTransform.position.x - healthTransform.rect.width;
-		currentHealth = player.GetComponent<Hero_1>().m_PV;
-	}
-
-	private int CurrentHealth
+	public int currentDammage;
+	public int CurrentHealth
 	{
 		get{ return currentHealth;}
 		set{ currentHealth = value;
@@ -33,44 +22,67 @@ public class HUD : MonoBehaviour {
 		}
 	}
 
-	// Update is called once per frame
-	void Update () {
-		currentHealth = player.GetComponent<Hero_1>().m_PV;
-		maxHealth = player.GetComponent<Hero_1>().m_PVmax;
+	public int maxHealth;
+	public Image visualHealth;
+	public GameObject player;
+
+	void Start () {
+		cachedY = healthTransform.localPosition.y;
+		maxXValue = healthTransform.localPosition.x;
+		minXValue = healthTransform.localPosition.x - healthTransform.rect.width;
+//		currentHealth = player.GetComponent<Hero_1>().m_PV;
 	}
+
+	void Update () {
+//		CurrentHealth = player.GetComponent<Hero_1>().m_PV;
+	}
+
 
 	private void HandleHealth()
 	{
-		healthText.text = "maxHealth: " + currentHealth;
-		float currentXValue = mapValues (currentHealth, 0, maxHealth, health_minXValue, health_maxXValue);
-		healthTransform.position = new Vector3 (currentXValue, cachedY);
+		healthText.text = "Life : " + currentHealth;
+		float currentXValue = mapValues (currentHealth, 0, maxHealth, minXValue, maxXValue);
+		Debug.Log ("currentXValue : " + currentXValue);
+
+//		healthTransform.localPosition = new Vector3 (currentXValue, cachedY);
+		StartCoroutine(MoveFunction(currentXValue));
+
+
 
 		if(currentHealth > maxHealth/2) // more than 50% of health
 		{
-			visualHealth.color = new Color32(255,(byte)mapValues(currentHealth, 0, maxHealth/2 ,0 , 255),0,255);
+			visualHealth.color = new Color32((byte)mapValues(currentHealth, maxHealth / 2, maxHealth, 255 , 0), 255, 0, 255);
 		}
 		else
 		{
-			visualHealth.color = new Color32(255,(byte)mapValues(currentHealth, 0, maxHealth/2 ,0 , 255),0,255);
+			visualHealth.color = new Color32(255,(byte)mapValues(currentHealth, 0, maxHealth / 2 ,0 , 255), 0, 255);
 		}
-
-		/*
-		if(currentHealth > maxHealth/2) // more than 50% of health
-		{
-			visualHealth.color = new Color32(mapValues(currentHealth,maxHealth/2,255,0),190,255,255);
-		}
-		else
-		{
-			visualHealth.color = new Color32(255,mapValues(currentHealth,0,maxHealth/2,0,255),0,255);
-		}
-		*/
-
 	}
-
 
 	private float mapValues(float x, float inMin, float inMax, float outMin, float outMax)
 	{
 		return (x - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
 	}
+
+
+	IEnumerator MoveFunction(float xVal)
+	{
+		float timeSinceStarted = 0f;
+		while (true)
+		{
+			timeSinceStarted += Time.deltaTime;
+			healthTransform.localPosition = Vector3.Lerp(healthTransform.localPosition, new Vector3 (xVal, cachedY), timeSinceStarted);
+			
+			// If the object has arrived, stop the coroutine
+			if (healthTransform.localPosition == new Vector3 (xVal, cachedY))
+			{
+				yield break;
+			}
+			
+			// Otherwise, continue next frame
+			yield return null;
+		}
+	}
+
 
 }

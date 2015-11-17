@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Hero_1 : MonoBehaviour
@@ -19,6 +19,8 @@ public class Hero_1 : MonoBehaviour
 	public GameObject m_Attack1_sp_target;
 	public GameObject m_Attack2_sp;
 	public GameObject m_Attack3_sp;
+	public GameObject m_HUD;
+
 	public Rigidbody m_Dart;
 	public Rigidbody m_SkillWind01;
 	public Rigidbody m_SkillWind02;
@@ -51,9 +53,11 @@ public class Hero_1 : MonoBehaviour
 	public float m_Post_stam;                // stamina of defensive posture and wind shield
 	public float m_TimerAtk;
 	public Transform m_Target;
+	HUD hud_script;
 
 	void Start()
 	{
+		m_HUD.GetComponent<HUD>().CurrentHealth = m_PV;
 		m_Animator = GetComponent<Animator>();
 		m_Rigidbody = GetComponent<Rigidbody>();
 		m_Capsule = GetComponent<CapsuleCollider>();
@@ -62,13 +66,14 @@ public class Hero_1 : MonoBehaviour
 		AudioSource PlayerSFx = GetComponent<AudioSource>();
 		m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 		m_OrigGroundCheckDistance = m_GroundCheckDistance;
-
+		hud_script = m_HUD.GetComponent<HUD> ();
 		m_Dart = Instantiate(Resources.Load("Dart", typeof(GameObject))) as Rigidbody;
 		m_Dart = Resources.Load("Dart") as Rigidbody;
 
 		m_SkillWind01 = Instantiate(Resources.Load("Dart", typeof(GameObject))) as Rigidbody;
 		m_SkillWind01 = Resources.Load("Dart") as Rigidbody;
 
+		m_PVmax = 100;
 		m_PV = 100;
 		m_Strenght = 5;
 		m_Atk1_stam = 2;            
@@ -166,15 +171,22 @@ public class Hero_1 : MonoBehaviour
 		if (LifeSafetyCooldown > 1) {
 			m_Hit = true;
 			m_PV = m_PV - dammage;
+
+			Debug.Log (LifeSafetyCooldown);
+
 			LifeSafetyCooldown = 0;
 
 			if(m_PV <= 0)
 			{
 				m_Dead = true;
 			}
+
+//			float m_PV_float = (float)m_PV;
+			hud_script.currentDammage = dammage;
+
+			hud_script.CurrentHealth = m_PV;
 		}
 	}
-
 
 
 	public void GetLife(int cure)
@@ -182,6 +194,8 @@ public class Hero_1 : MonoBehaviour
 		m_PV = m_PV + cure;
 		if (m_PV > m_PVmax)
 			m_PV = m_PVmax;
+//		float m_PV_float = (float)m_PV;
+		hud_script.CurrentHealth = m_PV;
 	}
 
 

@@ -5,7 +5,6 @@ public class Menu : MonoBehaviour {
 
 	// Use this for initialization
 	public void Start () {
-		PauseGame ();
 	}
 
 	public void PauseGame () {
