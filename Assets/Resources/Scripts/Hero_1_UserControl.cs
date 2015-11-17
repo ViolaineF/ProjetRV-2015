@@ -4,6 +4,7 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class Hero_1_UserControl : MonoBehaviour
 {
+	private RaycastHit rcHit;
 	private Hero_1 m_Character; // A reference to the ThirdPersonCharacter on the object
 	private Transform m_Cam;                  // A reference to the main camera in the scenes transform
 	private Vector3 m_CamForward;             // The current forward direction of the camera
@@ -13,9 +14,22 @@ public class Hero_1_UserControl : MonoBehaviour
 	private bool m_Atk02;                   // the skill_1 state
 	private bool m_Atk03;                   // the skill_2 state
 	private bool m_Posture;                   // the defensive posture and wind shield state
+	public GameObject M_PauseMenu;
+	Transform target;
 
 
 
+
+	public bool RaycastMouse(out RaycastHit hit)
+	{
+		bool rayHit = false;
+		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+		if(Physics.Raycast(ray, out hit))
+		{
+			rayHit = true;
+		}
+		return rayHit;
+	}
 
 	private void Start()
 	{
@@ -35,15 +49,46 @@ public class Hero_1_UserControl : MonoBehaviour
 		m_Character = GetComponent<Hero_1>();
 	}
 	
-	
+
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 	private void Update()
 	{
+		if (Input.GetMouseButtonDown (0)) 
+		{
+			if(RaycastMouse(out rcHit))
+			{
+				if(rcHit.transform.gameObject.tag == "Enemy")
+				{
+					Renderer rend = rcHit.transform.GetComponent<Renderer>();
+					if(rend != null)
+					{
+						rend.material.color = Color.white;
+//						StartCoroutine (FadeSelection());
+					}
+					rend = rcHit.transform.GetComponentInChildren<Renderer>();
+					if(rend != null)
+					{
+						rend.material.color = Color.white;
+						//						StartCoroutine (FadeSelection());
+					}
+
+					target = rcHit.transform;
+					Debug.Log (target.name);
+				}
+			}
+		}
+
 		if (!m_Jump)
 		{
 			m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
 		}
 	}
-	
+
+
+
+
 	
 	// Fixed update is called in sync with physics
 	private void FixedUpdate()
@@ -52,11 +97,18 @@ public class Hero_1_UserControl : MonoBehaviour
 		float h = CrossPlatformInputManager.GetAxis("Horizontal");
 //			float v = CrossPlatformInputManager.GetAxis("Vertical");
 		bool crouch = Input.GetKey(KeyCode.LeftControl);
+		m_Character.m_Target = target;
 		m_Atk01 = CrossPlatformInputManager.GetButtonDown("Fire1");
 		m_Atk02 = CrossPlatformInputManager.GetButtonDown("Fire2");
 		m_Atk03 = CrossPlatformInputManager.GetButtonDown("Fire3");
 		m_Posture = CrossPlatformInputManager.GetButtonDown("Defense");
-		
+
+		if (Input.GetKeyDown(KeyCode.P))
+		{
+			Time.timeScale = 0;
+			M_PauseMenu.SetActive(true);
+		}
+
 		// calculate move direction to pass to character
 		if (m_Cam != null)
 		{
@@ -64,7 +116,6 @@ public class Hero_1_UserControl : MonoBehaviour
 			m_CamForward = Vector3.Scale(m_Cam.forward, new Vector3(1, 0, 1)).normalized;
 //				m_Move = v*m_CamForward + h*m_Cam.right;
 			m_Move = h*m_Cam.right;
-
 		}
 		else
 		{
@@ -82,8 +133,13 @@ public class Hero_1_UserControl : MonoBehaviour
 		m_Jump = false;
 	}
 
-
-
+	/*
+	IEnumerator FadeSelection()
+	{
+		yield return new WaitForSeconds(5);
+		Destroy(this.gameObject);
+	}
+	*/
 
 }
 

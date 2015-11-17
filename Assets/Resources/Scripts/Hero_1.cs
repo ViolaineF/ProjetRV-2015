@@ -15,7 +15,8 @@ public class Hero_1 : MonoBehaviour
 	AudioSource PlayerSFx;
 	public AudioClip footStep;
 	public AudioClip hit;
-	public GameObject m_Attack1_sp;
+	public GameObject m_Attack1_sp_simple;
+	public GameObject m_Attack1_sp_target;
 	public GameObject m_Attack2_sp;
 	public GameObject m_Attack3_sp;
 	public Rigidbody m_Dart;
@@ -39,7 +40,8 @@ public class Hero_1 : MonoBehaviour
 	bool m_Attacking_2;
 	bool m_Attacking_3;
 	bool m_Def_Posture;
-	
+	float LifeSafetyCooldown;
+	public int m_PVmax;
 	public int m_PV;                         // life amount
 	public int m_Strenght;                   // Strenght amount
 	public int m_Speed; 
@@ -48,7 +50,7 @@ public class Hero_1 : MonoBehaviour
 	public float m_Atk3_stam;                  // stamina of attack_3
 	public float m_Post_stam;                // stamina of defensive posture and wind shield
 	public float m_TimerAtk;
-
+	public Transform m_Target;
 
 	void Start()
 	{
@@ -73,7 +75,6 @@ public class Hero_1 : MonoBehaviour
 		m_Atk2_stam = 2;               
 		m_Atk3_stam = 2;               
 		m_Post_stam = 4;
-
 	}
 
 	void update()
@@ -90,7 +91,7 @@ public class Hero_1 : MonoBehaviour
 		if(m_PV > 0){
 			// define a timer to prevent atk spamming between all of them
 			m_TimerAtk += Time.deltaTime;	
-			
+			LifeSafetyCooldown += Time.deltaTime;
 			// define a timer to prevent atk_1 spamming
 			if (m_Atk1_stam < 3)
 				m_Atk1_stam += Time.deltaTime;	
@@ -153,8 +154,6 @@ public class Hero_1 : MonoBehaviour
 			m_Hit = false;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////			
-		
-
 		}
 			
 		else {
@@ -164,16 +163,26 @@ public class Hero_1 : MonoBehaviour
 	
 	public void LooseLife(int dammage)
 	{
-		m_Hit = true;
-		m_PV = m_PV - dammage;
-		Debug.Log ("PV --!");
+		if (LifeSafetyCooldown > 1) {
+			m_Hit = true;
+			m_PV = m_PV - dammage;
+			LifeSafetyCooldown = 0;
 
-		if(m_PV <= 0)
-		{
-			m_Dead = true;
+			if(m_PV <= 0)
+			{
+				m_Dead = true;
+			}
 		}
 	}
 
+
+
+	public void GetLife(int cure)
+	{
+		m_PV = m_PV + cure;
+		if (m_PV > m_PVmax)
+			m_PV = m_PVmax;
+	}
 
 
 	void ScaleCapsuleForCrouching(bool crouch)
@@ -214,21 +223,35 @@ public class Hero_1 : MonoBehaviour
 		}
 	}
 
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	void AttackCommand_1()
 	{			
 		if (!m_Crouching && m_TimerAtk >= 1)
 		{
 			m_Atk1_stam = m_Atk1_stam - 1;
 			m_TimerAtk = 0;
-			RaycastHit hit;
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
 			Rigidbody clone;
-			clone = Instantiate(m_Dart, m_Attack1_sp.transform.position, m_Attack2_sp.transform.rotation) as Rigidbody;
+			if (m_Target != null && m_Target.gameObject.tag == "Enemy")
+			{
+				Vector3 targetDir = (m_Target.transform.position - transform.position);
+
+				clone = Instantiate(m_Dart, m_Attack1_sp_target.transform.position, m_Attack1_sp_target.transform.rotation) as Rigidbody;
+				clone.velocity = m_Attack1_sp_target.transform.TransformDirection(targetDir * 2);
+				m_Target = null;
+			}
+			else if (m_Target == null)
+			{
+				clone = Instantiate(m_Dart, m_Attack1_sp_simple.transform.position, m_Attack1_sp_simple.transform.rotation) as Rigidbody;
+				clone.velocity = m_Attack1_sp_simple.transform.TransformDirection(Vector3.forward * 10);
+			}
 //			transform.position = Vector3.MoveTowards(transform.position, m_Attack_sp.transform.position, Time.deltaTime * 50f);
-			clone.velocity = m_Attack1_sp.transform.TransformDirection(Vector3.forward * 10);
-		//	clone.velocity = m_Attack_sp.transform.TransformDirection(GetMousePositionInPlaneOfLauncher() * 2);
+//			clone.velocity = m_Attack_sp.transform.TransformDirection(GetMousePositionInPlaneOfLauncher() * 2);
 		}
 	}
+
+
 
 	/*
 	public Vector3 GetMousePositionInPlaneOfLauncher () {
