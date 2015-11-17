@@ -70,16 +70,11 @@ public class Hero_1 : MonoBehaviour
 		m_S1_stam = 2;            
 		m_S2_stam = 2;               
 		m_Post_stam = 4;
-
 	}
-	
-
 
 	void update()
 	{
-
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
 	}
 
 	public void Move(Vector3 move, bool crouch, bool jump, bool m_Atk01, bool m_Atk02, bool m_Atk03, bool m_Posture )
@@ -122,11 +117,9 @@ public class Hero_1 : MonoBehaviour
 			if (m_Atk01) {
 				AttackCommand_1 ();
 			}
-
 			if (m_Atk02) {
 				AttackCommand_2 ();
 			}
-
 			if (m_Atk03) {
 				AttackCommand_3 ();
 			}
@@ -141,6 +134,8 @@ public class Hero_1 : MonoBehaviour
 	public void LooseLife(int dammage)
 	{
 		m_PV = m_PV - dammage;
+		Debug.Log ("PV --!");
+
 		if(m_PV <= 0)
 		{
 			m_Dead = true;

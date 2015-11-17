@@ -21,7 +21,6 @@ public class Dart : MonoBehaviour {
 			col.gameObject.GetComponent<Enemy01>().LooseLife(power);
 			Destroy (this.gameObject);
 			SourceSFx.clip = SFx [5];
-
 		}
 	}
 

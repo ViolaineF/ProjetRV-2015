@@ -13,7 +13,7 @@ public class Enemy01 : MonoBehaviour
 	[SerializeField] float m_GroundCheckDistance = 0.1f;
 	
 	public GameObject m_Attack_sp;
-	public Rigidbody m_projectile;
+	public Rigidbody m_Atk_Fx;
 	Rigidbody m_Rigidbody;
 	Animator m_Animator;
 	bool m_IsGrounded;
@@ -25,8 +25,10 @@ public class Enemy01 : MonoBehaviour
 	float m_CapsuleHeight;
 	Vector3 m_CapsuleCenter;
 	CapsuleCollider m_Capsule;
+
+	float m_TimerAtk = 2;
+
 	bool m_Dead;
-	bool m_Crouching;
 	bool m_Attacking_1;
 	bool m_Attacking_2;
 	bool m_Attacking_3;
@@ -43,6 +45,7 @@ public class Enemy01 : MonoBehaviour
 
 	void Start()
 	{
+
 		m_Animator = GetComponent<Animator>();
 		m_Rigidbody = GetComponent<Rigidbody>();
 		m_Capsule = GetComponent<CapsuleCollider>();
@@ -52,36 +55,39 @@ public class Enemy01 : MonoBehaviour
 		m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 		m_OrigGroundCheckDistance = m_GroundCheckDistance;
 		
-		m_projectile = Instantiate(Resources.Load("Dart", typeof(GameObject))) as Rigidbody;
-		m_projectile = Resources.Load("Dart") as Rigidbody;
+		m_Atk_Fx = Instantiate(Resources.Load("E_Atk_Fx1", typeof(GameObject))) as Rigidbody;
+		m_Atk_Fx = Resources.Load("E_Atk_Fx1") as Rigidbody;
 	}
 	
 	
-	public void Move(Vector3 move, bool jump, bool m_Atk01, bool m_Atk02, bool m_Pos )
+	public void Move(Vector3 move, bool jump,  bool m_Pos )
 	{
-		
 		// convert the world relative moveInput vector into a local-relative
 		// turn amount and forward amount required to head in the desired
 		// direction.
 
-	if (!m_Dead) {
-		if (move.magnitude > 1f)
-				move.Normalize ();
-			move = transform.InverseTransformDirection (move);
-			CheckGroundStatus ();
-			move = Vector3.ProjectOnPlane (move, m_GroundNormal);
-			m_TurnAmount = Mathf.Atan2 (move.x, move.z);
-			m_ForwardAmount = move.z;
-			m_Attacking_1 = m_Atk01;
-			m_Attacking_2 = m_Atk02;
-			m_Posture = m_Pos;
 
-			ApplyExtraTurnRotation ();
+//		Debug.Log (m_Attacking_1);
+
+		if (m_PV > 0) {
+			m_TimerAtk += Time.deltaTime;
+
+			if (move.magnitude > 1f)
+				move.Normalize ();
+				move = transform.InverseTransformDirection (move);
+				CheckGroundStatus ();
+				move = Vector3.ProjectOnPlane (move, m_GroundNormal);
+				m_TurnAmount = Mathf.Atan2 (move.x, move.z);
+				m_ForwardAmount = move.z;
+				m_Posture = m_Pos;
+
+				ApplyExtraTurnRotation ();
 		
 		// control and velocity handling is different when grounded and airborne:
-		if (m_IsGrounded) {
-			HandleGroundedMovement (jump);
-		} 
+
+			if (m_IsGrounded) {
+				HandleGroundedMovement (jump);
+			} 
 
 			else {
 				HandleAirborneMovement ();
@@ -89,19 +95,15 @@ public class Enemy01 : MonoBehaviour
 		
 		// send input and other state parameters to the animator
 			UpdateAnimator (move);
-		
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////			
-		
-			if (m_Attacking_1) {
-			
-				AttackCommand ();
-			}	
-		
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////			
 		} 
-	
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+
+
+
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 		else {
-			//StartCoroutine(timerDestroy());
+			m_TimerAtk += Time.deltaTime;
 		}
 	}
 
@@ -114,11 +116,11 @@ public class Enemy01 : MonoBehaviour
 	public void AttackCommand()
 	{
 		// prevent standing up in crouch-only zones
-		if (!m_Crouching && m_Attacking_1)
+		if (m_TimerAtk > 1)
 		{
+			m_TimerAtk = 0;
 			Rigidbody clone;
-			clone = Instantiate(m_projectile, m_Attack_sp.transform.position, m_Attack_sp.transform.rotation) as Rigidbody;
-			
+			clone = Instantiate(m_Atk_Fx, m_Attack_sp.transform.position, m_Attack_sp.transform.rotation) as Rigidbody;
 			clone.velocity = m_Attack_sp.transform.TransformDirection(Vector3.forward * 10);
 		}
 	}
@@ -152,13 +154,15 @@ public class Enemy01 : MonoBehaviour
 		{
 			m_Animator.SetFloat("JumpLeg", jumpLeg);
 		}
-		
+
+
 		// the anim speed multiplier allows the overall speed of walking/running to be tweaked in the inspector,
 		// which affects the movement speed because of the root motion.
 		if (m_IsGrounded && move.magnitude > 0)
 		{
 			m_Animator.speed = m_AnimSpeedMultiplier;
 		}
+
 		else
 		{
 			// don't use that while airborne
@@ -266,7 +270,5 @@ public class Enemy01 : MonoBehaviour
 		yield return new WaitForSeconds(5);
 		Destroy(this.gameObject);
 	}
-
-
 }
 
