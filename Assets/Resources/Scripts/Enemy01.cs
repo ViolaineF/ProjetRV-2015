@@ -13,7 +13,7 @@ public class Enemy01 : MonoBehaviour
 	[SerializeField] float m_GroundCheckDistance = 0.1f;
 	
 	public GameObject m_Attack_sp;
-	public Rigidbody m_Atk_Fx;
+	public Rigidbody m_Atk_Fx1;
 	Rigidbody m_Rigidbody;
 	Animator m_Animator;
 	bool m_IsGrounded;
@@ -26,26 +26,27 @@ public class Enemy01 : MonoBehaviour
 	Vector3 m_CapsuleCenter;
 	CapsuleCollider m_Capsule;
 
-	float m_TimerAtk = 2;
-
 	bool m_Dead;
-	bool m_Attacking_1;
-	bool m_Attacking_2;
+	public bool m_Attacking_1;
+	public bool m_Attacking_2;
 	bool m_Attacking_3;
 	bool m_Posture;
 	bool m_levit;
-
+	bool m_Hit;
 	public int m_PV;                         // life amount
 	public int m_Strenght;                   // Strenght amount
 	public int m_Speed; 
 
-	float m_S1_stam;                  // stamina of skill_1
-	float m_S2_stam;                  // stamina of skill_2
-	float m_Post_stam;                // stamina of defensive posture and wind shield
+	public float m_Atk1_stam;                  // stamina of m_Atk1
+	public float m_Atk2_stam;                  // stamina of m_Atk2
+	public float m_Post_stam;                // stamina of defensive posture and wind shield
+	public float m_TimerAtk;
 
 	void Start()
 	{
-
+		m_Atk1_stam = 2;
+		m_Atk2_stam = 2;
+		m_TimerAtk = 2;
 		m_Animator = GetComponent<Animator>();
 		m_Rigidbody = GetComponent<Rigidbody>();
 		m_Capsule = GetComponent<CapsuleCollider>();
@@ -55,8 +56,8 @@ public class Enemy01 : MonoBehaviour
 		m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 		m_OrigGroundCheckDistance = m_GroundCheckDistance;
 		
-		m_Atk_Fx = Instantiate(Resources.Load("E_Atk_Fx1", typeof(GameObject))) as Rigidbody;
-		m_Atk_Fx = Resources.Load("E_Atk_Fx1") as Rigidbody;
+		m_Atk_Fx1 = Instantiate(Resources.Load("E_Atk_Fx1", typeof(GameObject))) as Rigidbody;
+		m_Atk_Fx1 = Resources.Load("E_Atk_Fx1") as Rigidbody;
 	}
 	
 	
@@ -66,22 +67,32 @@ public class Enemy01 : MonoBehaviour
 		// turn amount and forward amount required to head in the desired
 		// direction.
 
-
-//		Debug.Log (m_Attacking_1);
-
 		if (m_PV > 0) {
-			m_TimerAtk += Time.deltaTime;
+
+			// define a timer to prevent atk spamming between all of them
+			m_TimerAtk += Time.deltaTime;	
+			
+			// define a timer to prevent atk_1 spamming
+			if (m_Atk1_stam < 3)
+				m_Atk1_stam += Time.deltaTime;	
+			else
+				m_Atk1_stam = 3;
+			
+			// define a timer to prevent atk_2 spamming
+			if (m_Atk2_stam < 2)	
+				m_Atk2_stam += Time.deltaTime;	
+			else
+				m_Atk2_stam = 3;
 
 			if (move.magnitude > 1f)
 				move.Normalize ();
-				move = transform.InverseTransformDirection (move);
-				CheckGroundStatus ();
-				move = Vector3.ProjectOnPlane (move, m_GroundNormal);
-				m_TurnAmount = Mathf.Atan2 (move.x, move.z);
-				m_ForwardAmount = move.z;
-				m_Posture = m_Pos;
-
-				ApplyExtraTurnRotation ();
+			move = transform.InverseTransformDirection (move);
+			CheckGroundStatus ();
+			move = Vector3.ProjectOnPlane (move, m_GroundNormal);
+			m_TurnAmount = Mathf.Atan2 (move.x, move.z);
+			m_ForwardAmount = move.z;
+			m_Posture = m_Pos;
+			ApplyExtraTurnRotation ();
 		
 		// control and velocity handling is different when grounded and airborne:
 
@@ -92,15 +103,10 @@ public class Enemy01 : MonoBehaviour
 			else {
 				HandleAirborneMovement ();
 			}
-		
 		// send input and other state parameters to the animator
 			UpdateAnimator (move);
+			m_Hit = false;		// reset m_Hit
 		} 
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
-
-
-
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		else {
 			m_TimerAtk += Time.deltaTime;
@@ -110,18 +116,20 @@ public class Enemy01 : MonoBehaviour
 	public void LooseLife(int dammage)
 	{
 		m_PV = m_PV - dammage;
+		m_Hit = true;
 	}
 	
 
 	public void AttackCommand()
 	{
-		// prevent standing up in crouch-only zones
-		if (m_TimerAtk > 1)
-		{
+		if (m_TimerAtk >= 1)
+		{	
+			m_Attacking_1= true;
+			m_Atk1_stam = 0;
 			m_TimerAtk = 0;
 			Rigidbody clone;
-			clone = Instantiate(m_Atk_Fx, m_Attack_sp.transform.position, m_Attack_sp.transform.rotation) as Rigidbody;
-			clone.velocity = m_Attack_sp.transform.TransformDirection(Vector3.forward * 10);
+			clone = Instantiate(m_Atk_Fx1, m_Attack_sp.transform.position, m_Attack_sp.transform.rotation) as Rigidbody;
+//			clone.velocity = m_Attack_sp.transform.TransformDirection(Vector3.forward * 10);
 		}
 	}
 	
@@ -131,13 +139,12 @@ public class Enemy01 : MonoBehaviour
 		m_Animator.SetFloat("Forward", m_ForwardAmount, 0.1f, Time.deltaTime);
 		m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
 		m_Animator.SetBool("OnGround", m_IsGrounded);
-		
 		m_Animator.SetBool("Attack01", m_Attacking_1);
 		m_Animator.SetBool("Attack02", m_Attacking_2);
 		m_Animator.SetBool("Attack03", m_Attacking_3);
 		m_Animator.SetBool("Posture", m_Posture);
-		
-		
+		m_Animator.SetBool("Hit", m_Hit);
+
 		if (!m_IsGrounded)
 		{
 			m_Animator.SetFloat("Jump", m_Rigidbody.velocity.y);
@@ -150,7 +157,7 @@ public class Enemy01 : MonoBehaviour
 			Mathf.Repeat(
 				m_Animator.GetCurrentAnimatorStateInfo(0).normalizedTime + m_RunCycleLegOffset, 1);
 		float jumpLeg = (runCycle < k_Half ? 1 : -1) * m_ForwardAmount;
-		if (m_IsGrounded)
+		if (m_IsGrounded && m_TimerAtk >= 1)
 		{
 			m_Animator.SetFloat("JumpLeg", jumpLeg);
 		}
@@ -158,7 +165,7 @@ public class Enemy01 : MonoBehaviour
 
 		// the anim speed multiplier allows the overall speed of walking/running to be tweaked in the inspector,
 		// which affects the movement speed because of the root motion.
-		if (m_IsGrounded && move.magnitude > 0)
+		if (m_IsGrounded && move.magnitude > 0 && m_TimerAtk >= 1)
 		{
 			m_Animator.speed = m_AnimSpeedMultiplier;
 		}
@@ -169,8 +176,7 @@ public class Enemy01 : MonoBehaviour
 			m_Animator.speed = 1;
 		}
 	}
-	
-	
+
 	void HandleAirborneMovement()
 	{
 		// apply extra gravity from multiplier:

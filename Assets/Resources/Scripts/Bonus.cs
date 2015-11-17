@@ -15,8 +15,8 @@ public class Bonus : MonoBehaviour {
 	{
 		if(col.gameObject.tag == "Player")
 		{
-			GameObject thePlayer = GameObject.Find("Hero1");
-			Hero_1 playerScript = thePlayer.GetComponent<Hero_1>();
+			//GameObject thePlayer = GameObject.Find("Hero1");
+			Hero_1 playerScript = col.GetComponent<Hero_1>();
 
 			if(BonusType == 1)
 			{

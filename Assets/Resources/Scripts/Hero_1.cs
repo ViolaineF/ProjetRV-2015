@@ -15,9 +15,9 @@ public class Hero_1 : MonoBehaviour
 	AudioSource PlayerSFx;
 	public AudioClip footStep;
 	public AudioClip hit;
-	public GameObject m_Attack_sp;
-	public GameObject m_Skill_1_sp;
-	public GameObject m_Skill_2_sp;
+	public GameObject m_Attack1_sp;
+	public GameObject m_Attack2_sp;
+	public GameObject m_Attack3_sp;
 	public Rigidbody m_Dart;
 	public Rigidbody m_SkillWind01;
 	public Rigidbody m_SkillWind02;
@@ -33,6 +33,7 @@ public class Hero_1 : MonoBehaviour
 	Vector3 m_CapsuleCenter;
 	CapsuleCollider m_Capsule;
 	bool m_Dead;
+	bool m_Hit;
 	bool m_Crouching;
 	bool m_Attacking_1;
 	bool m_Attacking_2;
@@ -42,10 +43,11 @@ public class Hero_1 : MonoBehaviour
 	public int m_PV;                         // life amount
 	public int m_Strenght;                   // Strenght amount
 	public int m_Speed; 
-	float m_S1_stam;                  // stamina of skill_1
-	float m_S2_stam;                  // stamina of skill_2
-	float m_Post_stam;                // stamina of defensive posture and wind shield
-
+	public float m_Atk1_stam;                  // stamina of attack_1
+	public float m_Atk2_stam;                  // stamina of attack_2
+	public float m_Atk3_stam;                  // stamina of attack_3
+	public float m_Post_stam;                // stamina of defensive posture and wind shield
+	public float m_TimerAtk;
 
 
 	void Start()
@@ -67,9 +69,11 @@ public class Hero_1 : MonoBehaviour
 
 		m_PV = 100;
 		m_Strenght = 5;
-		m_S1_stam = 2;            
-		m_S2_stam = 2;               
+		m_Atk1_stam = 2;            
+		m_Atk2_stam = 2;               
+		m_Atk3_stam = 2;               
 		m_Post_stam = 4;
+
 	}
 
 	void update()
@@ -79,15 +83,39 @@ public class Hero_1 : MonoBehaviour
 
 	public void Move(Vector3 move, bool crouch, bool jump, bool m_Atk01, bool m_Atk02, bool m_Atk03, bool m_Posture )
 	{
-		
 		// convert the world relative moveInput vector into a local-relative
 		// turn amount and forward amount required to head in the desired
 		// direction.
 
-		if(!m_Dead){
+		if(m_PV > 0){
+			// define a timer to prevent atk spamming between all of them
+			m_TimerAtk += Time.deltaTime;	
+			
+			// define a timer to prevent atk_1 spamming
+			if (m_Atk1_stam < 3)
+				m_Atk1_stam += Time.deltaTime;	
+			else
+				m_Atk1_stam = 3;
+
+			// define a timer to prevent atk_2 spamming
+			if (m_Atk2_stam < 2)	
+				m_Atk2_stam += Time.deltaTime;	
+			else
+				m_Atk2_stam = 3;
+
+			// define a timer to prevent atk_2 spamming
+			if (m_Atk3_stam < 1)	
+				m_Atk3_stam += Time.deltaTime;	
+			else
+				m_Atk3_stam = 3;
 
 			if (move.magnitude > 1f)
 				move.Normalize ();
+
+			m_Attacking_1 = m_Atk01;
+			m_Attacking_2 = m_Atk02;
+			m_Attacking_3 = m_Atk03;
+
 			move = transform.InverseTransformDirection (move);
 			CheckGroundStatus ();
 			move = Vector3.ProjectOnPlane (move, m_GroundNormal);
@@ -99,6 +127,17 @@ public class Hero_1 : MonoBehaviour
 			m_Def_Posture = m_Posture;
 			ApplyExtraTurnRotation ();
 		
+			if (m_Attacking_1 && m_Atk1_stam >= 1) {
+				AttackCommand_1 ();
+			}
+			if (m_Attacking_2 && m_Atk2_stam >= 1) {
+				AttackCommand_2 ();
+			}
+			if (m_Attacking_3 && m_Atk3_stam >= 1) {
+				m_Attacking_3= true;
+				AttackCommand_3 ();
+			}
+
 		// control and velocity handling is different when grounded and airborne:
 			if (m_IsGrounded) {
 				HandleGroundedMovement (crouch, jump);
@@ -111,28 +150,21 @@ public class Hero_1 : MonoBehaviour
 			
 			// send input and other state parameters to the animator
 			UpdateAnimator (move);
-		
+			m_Hit = false;
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////			
 		
-			if (m_Atk01) {
-				AttackCommand_1 ();
-			}
-			if (m_Atk02) {
-				AttackCommand_2 ();
-			}
-			if (m_Atk03) {
-				AttackCommand_3 ();
-			}
+
 		}
 			
 		else {
 			StartCoroutine(timerDestroy());
 		}
-		
 	}
 	
 	public void LooseLife(int dammage)
 	{
+		m_Hit = true;
 		m_PV = m_PV - dammage;
 		Debug.Log ("PV --!");
 
@@ -181,23 +213,19 @@ public class Hero_1 : MonoBehaviour
 			}
 		}
 	}
-	
+
 	void AttackCommand_1()
 	{			
-		// prevent standing up in crouch-only zones
-		if (!m_Crouching)
+		if (!m_Crouching && m_TimerAtk >= 1)
 		{
+			m_Atk1_stam = m_Atk1_stam - 1;
+			m_TimerAtk = 0;
 			RaycastHit hit;
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-
 			Rigidbody clone;
-			clone = Instantiate(m_Dart, m_Attack_sp.transform.position, m_Attack_sp.transform.rotation) as Rigidbody;
-
+			clone = Instantiate(m_Dart, m_Attack1_sp.transform.position, m_Attack2_sp.transform.rotation) as Rigidbody;
 //			transform.position = Vector3.MoveTowards(transform.position, m_Attack_sp.transform.position, Time.deltaTime * 50f);
-
-			clone.velocity = m_Attack_sp.transform.TransformDirection(Vector3.forward * 10);
-
+			clone.velocity = m_Attack1_sp.transform.TransformDirection(Vector3.forward * 10);
 		//	clone.velocity = m_Attack_sp.transform.TransformDirection(GetMousePositionInPlaneOfLauncher() * 2);
 		}
 	}
@@ -217,28 +245,27 @@ public class Hero_1 : MonoBehaviour
 	}
 	*/
 
-
 	void AttackCommand_2()
 	{
-		// prevent standing up in crouch-only zones
-		if (!m_Crouching && m_Attacking_2 && m_S1_stam > 0)
+		if (!m_Crouching && m_TimerAtk >= 1)
 		{
+			m_Atk2_stam = m_Atk2_stam - 1;
+			m_TimerAtk = 0;
 			Rigidbody clone;
-			clone = Instantiate(m_SkillWind01, m_Skill_1_sp.transform.position, m_Skill_1_sp.transform.rotation) as Rigidbody;
-			
-			clone.velocity = m_Attack_sp.transform.TransformDirection(Vector3.forward * 10);
+			clone = Instantiate(m_SkillWind01, m_Attack2_sp.transform.position, m_Attack2_sp.transform.rotation) as Rigidbody;
+			clone.velocity = m_Attack2_sp.transform.TransformDirection(Vector3.forward * 10);
 		}
 	}
 
 	void AttackCommand_3()
 	{
 		// prevent standing up in crouch-only zones
-		if (!m_Crouching && m_Attacking_3 && m_S2_stam > 0)
+		if (!m_Crouching)
 		{
 			Rigidbody clone;
-			clone = Instantiate(m_SkillWind02, m_Skill_2_sp.transform.position, m_Skill_2_sp.transform.rotation) as Rigidbody;
+			clone = Instantiate(m_SkillWind02, m_Attack3_sp.transform.position, m_Attack3_sp.transform.rotation) as Rigidbody;
 			
-			clone.velocity = m_Attack_sp.transform.TransformDirection(Vector3.forward * 10);
+			clone.velocity = m_Attack3_sp.transform.TransformDirection(Vector3.forward * 10);
 		}
 	}
 
@@ -254,6 +281,7 @@ public class Hero_1 : MonoBehaviour
 		m_Animator.SetBool("Attack02", m_Attacking_2);
 		m_Animator.SetBool("Attack03", m_Attacking_3);
 		m_Animator.SetBool("Posture", m_Def_Posture);
+		m_Animator.SetBool("Hit", m_Hit);
 
 
 		if (!m_IsGrounded)

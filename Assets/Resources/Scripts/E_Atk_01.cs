@@ -11,9 +11,9 @@ public class E_Atk_01 : MonoBehaviour {
 	}
 	
 	
-	void OnCollisionEnter (Collision col)
+	void OnTriggerEnter (Collider col)
 	{
-		if(col.gameObject.name == "Player")
+		if(col.gameObject.tag == "Player")
 		{
 			Debug.Log ("coll");
 			col.gameObject.GetComponent<Hero_1>().LooseLife(power);
