@@ -14,11 +14,10 @@ public class Hero_1_UserControl : MonoBehaviour
 	private bool m_Atk02;                   // the skill_1 state
 	private bool m_Atk03;                   // the skill_2 state
 	private bool m_Posture;                   // the defensive posture and wind shield state
+
 	public GameObject M_PauseMenu;
 	Transform target;
-
-
-
+	
 
 	public bool RaycastMouse(out RaycastHit hit)
 	{

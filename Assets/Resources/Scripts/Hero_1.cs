@@ -250,7 +250,6 @@ public class Hero_1 : MonoBehaviour
 			if (m_Target != null && m_Target.gameObject.tag == "Enemy")
 			{
 				Vector3 targetDir = (m_Target.transform.position - transform.position);
-
 				clone = Instantiate(m_Dart, m_Attack1_sp_target.transform.position, m_Attack1_sp_target.transform.rotation) as Rigidbody;
 				clone.velocity = m_Attack1_sp_target.transform.TransformDirection(targetDir * 2);
 				m_Target = null;
