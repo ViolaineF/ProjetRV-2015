@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Dart : MonoBehaviour {
+public class Atk_Dart : MonoBehaviour {
 	public AudioClip[] SFx;
 	public int Nsound;
 	AudioSource SourceSFx;
@@ -10,6 +10,8 @@ public class Dart : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		SourceSFx = this.GetComponent<AudioSource> () ;
+		SourceSFx.clip = SFx [Random.Range (0, Nsound)];
+		SourceSFx.Play ();
 		StartCoroutine (timerDestroy());
 	}
 
@@ -26,8 +28,6 @@ public class Dart : MonoBehaviour {
 
 	IEnumerator timerDestroy()
 	{			
-		SourceSFx.clip = SFx [Random.Range (0, Nsound)];
-		SourceSFx.Play ();
 		yield return new WaitForSeconds(2);
 		Destroy (this.gameObject);
 	}
