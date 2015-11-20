@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-
+using UnityEngine;
+using System.Collections;
 
 public class Hero_1 : MonoBehaviour
 {
@@ -15,9 +15,12 @@ public class Hero_1 : MonoBehaviour
 	AudioSource PlayerSFx;
 	public AudioClip footStep;
 	public AudioClip hit;
-	public GameObject m_Attack_sp;
-	public GameObject m_Skill_1_sp;
-	public GameObject m_Skill_2_sp;
+	public GameObject m_Attack1_sp_simple;
+	public GameObject m_Attack1_sp_target;
+	public GameObject m_Attack2_sp;
+	public GameObject m_Attack3_sp;
+	public GameObject m_HUD;
+
 	public Rigidbody m_Dart;
 	public Rigidbody m_SkillWind01;
 	public Rigidbody m_SkillWind02;
@@ -32,23 +35,29 @@ public class Hero_1 : MonoBehaviour
 	float m_CapsuleHeight;
 	Vector3 m_CapsuleCenter;
 	CapsuleCollider m_Capsule;
+	bool m_Dead;
+	bool m_Hit;
 	bool m_Crouching;
-	bool m_Attacking;
-	bool m_Skill_1_use;
-	bool m_Skill_2_use;
+	bool m_Attacking_1;
+	bool m_Attacking_2;
+	bool m_Attacking_3;
 	bool m_Def_Posture;
-	
+	float LifeSafetyCooldown;
+	public int m_PVmax;
 	public int m_PV;                         // life amount
 	public int m_Strenght;                   // Strenght amount
 	public int m_Speed; 
-	float m_S1_stam;                  // stamina of skill_1
-	float m_S2_stam;                  // stamina of skill_2
-	float m_Post_stam;                // stamina of defensive posture and wind shield
-
-
+	public float m_Atk1_stam;                  // stamina of attack_1
+	public float m_Atk2_stam;                  // stamina of attack_2
+	public float m_Atk3_stam;                  // stamina of attack_3
+	public float m_Post_stam;                // stamina of defensive posture and wind shield
+	public float m_TimerAtk;
+	public Transform m_Target;
+	HUD hud_script;
 
 	void Start()
 	{
+		m_HUD.GetComponent<HUD>().CurrentHealth = m_PV;
 		m_Animator = GetComponent<Animator>();
 		m_Rigidbody = GetComponent<Rigidbody>();
 		m_Capsule = GetComponent<CapsuleCollider>();
@@ -57,91 +66,137 @@ public class Hero_1 : MonoBehaviour
 		AudioSource PlayerSFx = GetComponent<AudioSource>();
 		m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 		m_OrigGroundCheckDistance = m_GroundCheckDistance;
-
+		hud_script = m_HUD.GetComponent<HUD> ();
 		m_Dart = Instantiate(Resources.Load("Dart", typeof(GameObject))) as Rigidbody;
 		m_Dart = Resources.Load("Dart") as Rigidbody;
 
 		m_SkillWind01 = Instantiate(Resources.Load("Dart", typeof(GameObject))) as Rigidbody;
 		m_SkillWind01 = Resources.Load("Dart") as Rigidbody;
 
+		m_PVmax = 100;
 		m_PV = 100;
 		m_Strenght = 5;
-		m_S1_stam = 2;            
-		m_S2_stam = 2;               
+		m_Atk1_stam = 2;            
+		m_Atk2_stam = 2;               
+		m_Atk3_stam = 2;               
 		m_Post_stam = 4;
-
 	}
-	
-
 
 	void update()
 	{
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
 	}
 
-	public void Move(Vector3 move, bool crouch, bool jump, bool m_Attack, bool m_Skill_1, bool m_Skill_2, bool m_Posture )
+	public void Move(Vector3 move, bool crouch, bool jump, bool m_Atk01, bool m_Atk02, bool m_Atk03, bool m_Posture )
 	{
-		
 		// convert the world relative moveInput vector into a local-relative
 		// turn amount and forward amount required to head in the desired
 		// direction.
-		if (move.magnitude > 1f) move.Normalize();
-		move = transform.InverseTransformDirection(move);
-		CheckGroundStatus();
-		move = Vector3.ProjectOnPlane(move, m_GroundNormal);
-		m_TurnAmount = Mathf.Atan2(move.x, move.z);
-		m_ForwardAmount = move.z;
-		m_Attacking = m_Attack;
-		m_Skill_1_use = m_Skill_1;
-		m_Skill_2_use = m_Skill_2;
-		m_Def_Posture = m_Posture;
-		ApplyExtraTurnRotation();
+
+		if(m_PV > 0){
+			// define a timer to prevent atk spamming between all of them
+			m_TimerAtk += Time.deltaTime;	
+			LifeSafetyCooldown += Time.deltaTime;
+			// define a timer to prevent atk_1 spamming
+			if (m_Atk1_stam < 3)
+				m_Atk1_stam += Time.deltaTime;	
+			else
+				m_Atk1_stam = 3;
+
+			// define a timer to prevent atk_2 spamming
+			if (m_Atk2_stam < 2)	
+				m_Atk2_stam += Time.deltaTime;	
+			else
+				m_Atk2_stam = 3;
+
+			// define a timer to prevent atk_2 spamming
+			if (m_Atk3_stam < 1)	
+				m_Atk3_stam += Time.deltaTime;	
+			else
+				m_Atk3_stam = 3;
+
+			if (move.magnitude > 1f)
+				move.Normalize ();
+
+			m_Attacking_1 = m_Atk01;
+			m_Attacking_2 = m_Atk02;
+			m_Attacking_3 = m_Atk03;
+
+			move = transform.InverseTransformDirection (move);
+			CheckGroundStatus ();
+			move = Vector3.ProjectOnPlane (move, m_GroundNormal);
+			m_TurnAmount = Mathf.Atan2 (move.x, move.z);
+			m_ForwardAmount = move.z;
+			m_Attacking_1 = m_Attacking_1;
+			m_Attacking_2 = m_Attacking_2;
+			m_Attacking_3 = m_Attacking_3;
+			m_Def_Posture = m_Posture;
+			ApplyExtraTurnRotation ();
 		
+			if (m_Attacking_1 && m_Atk1_stam >= 1) {
+				AttackCommand_1 ();
+			}
+			if (m_Attacking_2 && m_Atk2_stam >= 1) {
+				AttackCommand_2 ();
+			}
+			if (m_Attacking_3 && m_Atk3_stam >= 1) {
+				m_Attacking_3= true;
+				AttackCommand_3 ();
+			}
+
 		// control and velocity handling is different when grounded and airborne:
-		if (m_IsGrounded)
-		{
-			HandleGroundedMovement(crouch, jump);
-		}
-		else
-		{
-			HandleAirborneMovement();
-		}
-		
-		ScaleCapsuleForCrouching(crouch);
-		PreventStandingInLowHeadroom();
-		
-		// send input and other state parameters to the animator
-		UpdateAnimator(move);
-		
+			if (m_IsGrounded) {
+				HandleGroundedMovement (crouch, jump);
+			} else {
+				HandleAirborneMovement ();
+			}
+			
+			ScaleCapsuleForCrouching (crouch);
+			PreventStandingInLowHeadroom ();
+			
+			// send input and other state parameters to the animator
+			UpdateAnimator (move);
+			m_Hit = false;
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////			
-		
-		if (m_Attack) {
-
-			AttackCommand();
 		}
-
-		if (m_Skill_1) {
 			
-			Skill01Command();
+		else {
+			StartCoroutine(timerDestroy());
 		}
-
-		if (m_Skill_2) {
-			
-			Skill02Command();
-		}
-
-
 	}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-				 
-	void LooseLife(int dammage)
+	
+	public void LooseLife(int dammage)
 	{
-		m_PV = m_PV - dammage;
+		if (LifeSafetyCooldown > 1) {
+			m_Hit = true;
+			m_PV = m_PV - dammage;
+
+			Debug.Log (LifeSafetyCooldown);
+
+			LifeSafetyCooldown = 0;
+
+			if(m_PV <= 0)
+			{
+				m_Dead = true;
+			}
+
+//			float m_PV_float = (float)m_PV;
+			hud_script.currentDammage = dammage;
+
+			hud_script.CurrentHealth = m_PV;
+		}
 	}
 
 
+	public void GetLife(int cure)
+	{
+		m_PV = m_PV + cure;
+		if (m_PV > m_PVmax)
+			m_PV = m_PVmax;
+//		float m_PV_float = (float)m_PV;
+		hud_script.CurrentHealth = m_PV;
+	}
 
 
 	void ScaleCapsuleForCrouching(bool crouch)
@@ -181,27 +236,35 @@ public class Hero_1 : MonoBehaviour
 			}
 		}
 	}
-	
-	void AttackCommand()
-	{
-		// prevent standing up in crouch-only zones
-		if (!m_Crouching && m_Attacking)
-		{
-			RaycastHit hit;
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	void AttackCommand_1()
+	{			
+		if (!m_Crouching && m_TimerAtk >= 1)
+		{
+			m_Atk1_stam = m_Atk1_stam - 1;
+			m_TimerAtk = 0;
 
 			Rigidbody clone;
-			clone = Instantiate(m_Dart, m_Attack_sp.transform.position, m_Attack_sp.transform.rotation) as Rigidbody;
-
+			if (m_Target != null && m_Target.gameObject.tag == "Enemy")
+			{
+				Vector3 targetDir = (m_Target.transform.position - transform.position);
+				clone = Instantiate(m_Dart, m_Attack1_sp_target.transform.position, m_Attack1_sp_target.transform.rotation) as Rigidbody;
+				clone.velocity = m_Attack1_sp_target.transform.TransformDirection(targetDir * 2);
+				m_Target = null;
+			}
+			else if (m_Target == null)
+			{
+				clone = Instantiate(m_Dart, m_Attack1_sp_simple.transform.position, m_Attack1_sp_simple.transform.rotation) as Rigidbody;
+				clone.velocity = m_Attack1_sp_simple.transform.TransformDirection(Vector3.forward * 10);
+			}
 //			transform.position = Vector3.MoveTowards(transform.position, m_Attack_sp.transform.position, Time.deltaTime * 50f);
-
-			clone.velocity = m_Attack_sp.transform.TransformDirection(Vector3.forward * 10);
-
-
-		//	clone.velocity = m_Attack_sp.transform.TransformDirection(GetMousePositionInPlaneOfLauncher() * 2);
+//			clone.velocity = m_Attack_sp.transform.TransformDirection(GetMousePositionInPlaneOfLauncher() * 2);
 		}
 	}
+
+
 
 	/*
 	public Vector3 GetMousePositionInPlaneOfLauncher () {
@@ -218,28 +281,27 @@ public class Hero_1 : MonoBehaviour
 	}
 	*/
 
-
-	void Skill01Command()
+	void AttackCommand_2()
 	{
-		// prevent standing up in crouch-only zones
-		if (!m_Crouching && m_Skill_1_use && m_S1_stam > 0)
+		if (!m_Crouching && m_TimerAtk >= 1)
 		{
+			m_Atk2_stam = m_Atk2_stam - 1;
+			m_TimerAtk = 0;
 			Rigidbody clone;
-			clone = Instantiate(m_SkillWind01, m_Skill_1_sp.transform.position, m_Skill_1_sp.transform.rotation) as Rigidbody;
-			
-			clone.velocity = m_Attack_sp.transform.TransformDirection(Vector3.forward * 10);
+			clone = Instantiate(m_SkillWind01, m_Attack2_sp.transform.position, m_Attack2_sp.transform.rotation) as Rigidbody;
+			clone.velocity = m_Attack2_sp.transform.TransformDirection(Vector3.forward * 10);
 		}
 	}
 
-	void Skill02Command()
+	void AttackCommand_3()
 	{
 		// prevent standing up in crouch-only zones
-		if (!m_Crouching && m_Skill_2_use && m_S2_stam > 0)
+		if (!m_Crouching)
 		{
 			Rigidbody clone;
-			clone = Instantiate(m_SkillWind02, m_Skill_2_sp.transform.position, m_Skill_2_sp.transform.rotation) as Rigidbody;
+			clone = Instantiate(m_SkillWind02, m_Attack3_sp.transform.position, m_Attack3_sp.transform.rotation) as Rigidbody;
 			
-			clone.velocity = m_Attack_sp.transform.TransformDirection(Vector3.forward * 10);
+			clone.velocity = m_Attack3_sp.transform.TransformDirection(Vector3.forward * 10);
 		}
 	}
 
@@ -251,10 +313,11 @@ public class Hero_1 : MonoBehaviour
 		m_Animator.SetBool("Crouch", m_Crouching);
 		m_Animator.SetBool("OnGround", m_IsGrounded);
 
-		m_Animator.SetBool("Attack", m_Attacking);
-		m_Animator.SetBool("Skill_1", m_Skill_1_use);
-		m_Animator.SetBool("Skill_2", m_Skill_2_use);
+		m_Animator.SetBool("Attack01", m_Attacking_1);
+		m_Animator.SetBool("Attack02", m_Attacking_2);
+		m_Animator.SetBool("Attack03", m_Attacking_3);
 		m_Animator.SetBool("Posture", m_Def_Posture);
+		m_Animator.SetBool("Hit", m_Hit);
 
 
 		if (!m_IsGrounded)
@@ -364,6 +427,15 @@ public class Hero_1 : MonoBehaviour
 			m_Animator.applyRootMotion = false;
 		}
 	}
+
+
+	IEnumerator timerDestroy()
+	{
+		m_Animator.SetBool("Dead", true);
+		yield return new WaitForSeconds(5);
+		Destroy(this.gameObject);
+	}
+
 
 	/*
 	void OnCollisionEnter (Collision col)

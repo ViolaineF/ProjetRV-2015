@@ -1,10 +1,18 @@
 fileFormatVersion: 2
 guid: 61455ff5874521e4bb66e6206b0c27b6
-timeCreated: 1447450575
+timeCreated: 1447699101
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - footStep: {instanceID: 0}
+  - hit: {instanceID: 0}
+  - m_Attack_sp: {instanceID: 0}
+  - m_Skill_1_sp: {instanceID: 0}
+  - m_Skill_2_sp: {instanceID: 0}
+  - m_Dart: {instanceID: 0}
+  - m_SkillWind01: {instanceID: 0}
+  - m_SkillWind02: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

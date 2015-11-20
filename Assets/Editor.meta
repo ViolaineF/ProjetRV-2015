@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Editor.meta
 guid: d1f5783c1657eb04cb53ff9729f8eaed
 folderAsset: yes
 timeCreated: 1447751384
+=======
+guid: f8b6fb94bb74b4f4e89839d15eaeefd9
+folderAsset: yes
+timeCreated: 1447683496
+>>>>>>> 108d9f4556865a1014816b4806f977a48289d708:Assets/Editor.meta
 licenseType: Free
 DefaultImporter:
   userData: 
