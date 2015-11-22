@@ -56,35 +56,36 @@ public class BossIA : MonoBehaviour {
 		// update the animator parameters
 		m_Animator.SetBool("Attack01", m_Attacking_1);
 		m_Animator.SetBool("Hit", m_Hit);
-		m_Animator.SetBool("Death", m_Death);
 
 		m_Attacking_1 = false; // Reset the bool for changing anim state so the anim play once
 		m_Hit = false;
-		m_Death = false;
-
 	}
 
 	// Update is called once per frame
 	void Update () {
 
 		//Check if the Boss is dead
-		if(m_PV <= 0 && m_Dead == false)
+		if(m_PV <= 0)
 		{
-			m_Death = true;
-			Debug.Log("Death is set to TRUE");
-			m_Dead = true;
+			if(m_Dead == true){
 
-			//m_Animator.SetLayerWeight(1,1.0f);
+				m_Animator.SetBool("Death", false);
 
-			m_IsAttacking = false;
-			StopCoroutine(AttacksIA());
-			Debug.Log("Stopped Coroutine");
+			}else {
+
+				m_Animator.SetBool("Death", true);
+				m_Dead = true;
+				
+				m_IsAttacking = false;
+				StopCoroutine(AttacksIA());
+			}
+
 		}
 	
 		UpdateAnimator();
 
 		if(Input.GetMouseButtonDown(0)){
-			LooseLife(5);
+			LooseLife(10);
 		}
 
 	}
