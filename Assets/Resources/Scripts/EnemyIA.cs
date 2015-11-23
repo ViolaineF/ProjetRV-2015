@@ -22,7 +22,11 @@ public class EnemyIA : MonoBehaviour
 		agent.updatePosition = true;
 		target = GameObject.FindGameObjectWithTag("Player").transform;
 	}
-	
+
+	/// <summary>
+	/// Check if the player is close enough to attack
+	/// </summary>
+	/// <param name="col">Col.</param>
 	void OnTriggerStay (Collider col)
 	{
 		if(col.gameObject.tag == "Player" && character.m_PV > 0)
@@ -51,6 +55,10 @@ public class EnemyIA : MonoBehaviour
 
 	}
 
+	/// <summary>
+	/// Reset the enemy destination when the player has disappeared
+	/// </summary>
+	/// <param name="target">Target.</param>
 	public void SetTarget(Transform target)
 	{
 		this.target = target;

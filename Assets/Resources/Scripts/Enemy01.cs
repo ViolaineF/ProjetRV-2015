@@ -113,13 +113,19 @@ public class Enemy01 : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Looses the life.
+	/// </summary>
+	/// <param name="dammage">Dammage.</param>
 	public void LooseLife(int dammage)
 	{
 		m_PV = m_PV - dammage;
 		m_Hit = true;
 	}
 	
-
+	/// <summary>
+	/// Set an attack from the enemy, animation, cooldown...
+	/// </summary>
 	public void AttackCommand()
 	{
 		if (m_TimerAtk >= 1)
@@ -132,7 +138,8 @@ public class Enemy01 : MonoBehaviour
 //			clone.velocity = m_Attack_sp.transform.TransformDirection(Vector3.forward * 10);
 		}
 	}
-	
+
+
 	void UpdateAnimator(Vector3 move)
 	{
 		// update the animator parameters
