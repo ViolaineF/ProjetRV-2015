@@ -13,7 +13,9 @@ public class Enemy01 : MonoBehaviour
 	[SerializeField] float m_GroundCheckDistance = 0.1f;
 	
 	public GameObject m_Attack_sp;
+	public GameObject m_Death_sp;
 	public Rigidbody m_Atk_Fx1;
+	public GameObject Death_Particle;
 	Rigidbody m_Rigidbody;
 	Animator m_Animator;
 	bool m_IsGrounded;
@@ -35,7 +37,8 @@ public class Enemy01 : MonoBehaviour
 	bool m_Hit;
 	public int m_PV;                         // life amount
 	public int m_Strenght;                   // Strenght amount
-	public int m_Speed; 
+//	m_Speed = m_MoveSpeedMultiplier = 0.8;
+
 
 	public float m_Atk1_stam;                  // stamina of m_Atk1
 	public float m_Atk2_stam;                  // stamina of m_Atk2
@@ -121,6 +124,16 @@ public class Enemy01 : MonoBehaviour
 	{
 		m_PV = m_PV - dammage;
 		m_Hit = true;
+		m_TimerAtk = 0;
+		m_MoveSpeedMultiplier = 0f;
+		if(m_PV <= 0)
+		{
+			GameObject Death_P_Clone;
+			Death_P_Clone = Instantiate(Death_Particle, m_Death_sp.transform.position, m_Death_sp.transform.rotation) as GameObject;
+			m_Animator.SetTrigger("T_Dead");
+
+			StartCoroutine(timerDestroy());
+		}
 	}
 	
 	/// <summary>
@@ -128,9 +141,21 @@ public class Enemy01 : MonoBehaviour
 	/// </summary>
 	public void AttackCommand()
 	{
-		if (m_TimerAtk >= 1)
+		if (m_TimerAtk >= 2)
 		{	
 			m_Attacking_1= true;
+			int RandomAtk = Random.Range (0, 2);
+
+			if (RandomAtk == 0)
+			{
+				m_Animator.SetTrigger("T_Attack01");
+			}
+
+			else if (RandomAtk == 1)
+			{
+				m_Animator.SetTrigger("T_Attack02");
+			}
+
 			m_Atk1_stam = 0;
 			m_TimerAtk = 0;
 			Rigidbody clone;
@@ -146,10 +171,9 @@ public class Enemy01 : MonoBehaviour
 		m_Animator.SetFloat("Forward", m_ForwardAmount, 0.1f, Time.deltaTime);
 		m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
 		m_Animator.SetBool("OnGround", m_IsGrounded);
-		m_Animator.SetBool("Attack01", m_Attacking_1);
-		m_Animator.SetBool("Attack02", m_Attacking_2);
-		m_Animator.SetBool("Attack03", m_Attacking_3);
-		m_Animator.SetBool("Posture", m_Posture);
+//		m_Animator.SetBool("Attack01", m_Attacking_1);
+//		m_Animator.SetBool("Attack02", m_Attacking_2);
+//		m_Animator.SetBool("Posture", m_Posture);
 		m_Animator.SetBool("Hit", m_Hit);
 
 		if (!m_IsGrounded)
@@ -219,8 +243,9 @@ public class Enemy01 : MonoBehaviour
 	{
 		// we implement this function to override the default root motion.
 		// this allows us to modify the positional speed before it's applied.
-		if (m_IsGrounded && Time.deltaTime > 0)
+		if (m_IsGrounded && m_TimerAtk > 2)
 		{
+			m_MoveSpeedMultiplier = 0.8f;
 			Vector3 v = (m_Animator.deltaPosition * m_MoveSpeedMultiplier) / Time.deltaTime;
 			
 			// we preserve the existing y part of the current velocity.
@@ -264,10 +289,7 @@ public class Enemy01 : MonoBehaviour
 
 	void Update()
 	{
-		if(m_PV <= 0)
-		{
-			StartCoroutine(timerDestroy());
-		}
+
 		if (m_levit) {
 
 			m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x, m_JumpPower, m_Rigidbody.velocity.z);
@@ -279,8 +301,7 @@ public class Enemy01 : MonoBehaviour
 
 	IEnumerator timerDestroy()
 	{
-		m_Animator.SetBool("Dead", true);
-		yield return new WaitForSeconds(5);
+		yield return new WaitForSeconds(1);
 		Destroy(this.gameObject);
 	}
 }

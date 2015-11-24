@@ -1,0 +1,811 @@
+fileFormatVersion: 2
+guid: 1d827295bc12ca042be21a4e5e238e75
+timeCreated: 1448377625
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Base Human
+    100002: Base HumanLCalf
+    100004: Base HumanLFoot
+    100006: Base HumanLForearm
+    100008: Base HumanLThigh
+    100010: Base HumanLUpperarm
+    100012: Base HumanNeck1
+    100014: Base HumanNeck2
+    100016: Base HumanNeck3
+    100018: Base HumanRArmCollarbone
+    100020: Base HumanRArmForearm
+    100022: Base HumanRArmPalm
+    100024: Base HumanRArmUpperarm
+    100026: Base HumanRLegCalf
+    100028: Base HumanRLegFoot
+    100030: Base HumanRLegPlatform
+    100032: Base HumanRLegThigh
+    100034: Base HumanSpine1
+    100036: Base HumanSpine2
+    100038: Base HumanSpine3
+    100040: Crowd001
+    100042: Enemy1
+    100044: //RootNode
+    100046: IKTarget001
+    100048: Object002
+    100050: Object007
+    100052: Object008
+    100054: Object011
+    100056: Pelvis001
+    400000: Base Human
+    400002: Base HumanLCalf
+    400004: Base HumanLFoot
+    400006: Base HumanLForearm
+    400008: Base HumanLThigh
+    400010: Base HumanLUpperarm
+    400012: Base HumanNeck1
+    400014: Base HumanNeck2
+    400016: Base HumanNeck3
+    400018: Base HumanRArmCollarbone
+    400020: Base HumanRArmForearm
+    400022: Base HumanRArmPalm
+    400024: Base HumanRArmUpperarm
+    400026: Base HumanRLegCalf
+    400028: Base HumanRLegFoot
+    400030: Base HumanRLegPlatform
+    400032: Base HumanRLegThigh
+    400034: Base HumanSpine1
+    400036: Base HumanSpine2
+    400038: Base HumanSpine3
+    400040: Crowd001
+    400042: Enemy1
+    400044: //RootNode
+    400046: IKTarget001
+    400048: Object002
+    400050: Object007
+    400052: Object008
+    400054: Object011
+    400056: Pelvis001
+    4300000: Enemy1
+    7400000: Enemy_1_Idle_2
+    7400002: Enemy_1_Idle_1
+    7400004: Enemy_1_Walk
+    7400006: Enemy_1_Attack_1
+    7400008: Enemy_1_Attack_2
+    7400010: Enemy_1_Hit
+    7400012: Enemy_1_Death
+    9500000: //RootNode
+    13700000: Enemy1
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Enemy_1_Idle_2
+      takeName: Enemy1_Rig_2_allAnim
+      firstFrame: 42
+      lastFrame: 176
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base Human
+        weight: 1
+      - path: Base HumanRLegPlatform
+        weight: 1
+      - path: Enemy1
+        weight: 1
+      - path: IKTarget001
+        weight: 1
+      - path: Pelvis001
+        weight: 1
+      - path: Pelvis001/Base HumanLThigh
+        weight: 1
+      - path: Pelvis001/Base HumanLThigh/Base HumanLCalf
+        weight: 1
+      - path: Pelvis001/Base HumanLThigh/Base HumanLCalf/Base HumanLFoot
+        weight: 1
+      - path: Pelvis001/Base HumanRLegThigh
+        weight: 1
+      - path: Pelvis001/Base HumanRLegThigh/Base HumanRLegCalf
+        weight: 1
+      - path: Pelvis001/Base HumanRLegThigh/Base HumanRLegCalf/Base HumanRLegFoot
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1/Base HumanNeck2
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1/Base HumanNeck2/Base HumanNeck3
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1/Base HumanNeck2/Base HumanNeck3/Object011
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1/Base HumanNeck2/Base HumanNeck3/Object011/Crowd001
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanRArmCollarbone
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanRArmCollarbone/Base HumanRArmUpperarm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanRArmCollarbone/Base HumanRArmUpperarm/Base HumanRArmForearm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanRArmCollarbone/Base HumanRArmUpperarm/Base HumanRArmForearm/Base HumanRArmPalm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Object007
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Object007/Base
+          HumanLUpperarm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Object007/Base
+          HumanLUpperarm/Base HumanLForearm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Object007/Base
+          HumanLUpperarm/Base HumanLForearm/Object008
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Enemy_1_Idle_1
+      takeName: Enemy1_Rig_2_allAnim
+      firstFrame: 3
+      lastFrame: 43
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base Human
+        weight: 1
+      - path: Base HumanRLegPlatform
+        weight: 1
+      - path: Enemy1
+        weight: 1
+      - path: IKTarget001
+        weight: 1
+      - path: Pelvis001
+        weight: 1
+      - path: Pelvis001/Base HumanLThigh
+        weight: 1
+      - path: Pelvis001/Base HumanLThigh/Base HumanLCalf
+        weight: 1
+      - path: Pelvis001/Base HumanLThigh/Base HumanLCalf/Base HumanLFoot
+        weight: 1
+      - path: Pelvis001/Base HumanRLegThigh
+        weight: 1
+      - path: Pelvis001/Base HumanRLegThigh/Base HumanRLegCalf
+        weight: 1
+      - path: Pelvis001/Base HumanRLegThigh/Base HumanRLegCalf/Base HumanRLegFoot
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1/Base HumanNeck2
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1/Base HumanNeck2/Base HumanNeck3
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1/Base HumanNeck2/Base HumanNeck3/Object011
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1/Base HumanNeck2/Base HumanNeck3/Object011/Crowd001
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanRArmCollarbone
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanRArmCollarbone/Base HumanRArmUpperarm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanRArmCollarbone/Base HumanRArmUpperarm/Base HumanRArmForearm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanRArmCollarbone/Base HumanRArmUpperarm/Base HumanRArmForearm/Base HumanRArmPalm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Object007
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Object007/Base
+          HumanLUpperarm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Object007/Base
+          HumanLUpperarm/Base HumanLForearm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Object007/Base
+          HumanLUpperarm/Base HumanLForearm/Object008
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Enemy_1_Walk
+      takeName: Enemy1_Rig_2_allAnim
+      firstFrame: 186
+      lastFrame: 218
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base Human
+        weight: 1
+      - path: Base HumanRLegPlatform
+        weight: 1
+      - path: Enemy1
+        weight: 1
+      - path: IKTarget001
+        weight: 1
+      - path: Pelvis001
+        weight: 1
+      - path: Pelvis001/Base HumanLThigh
+        weight: 1
+      - path: Pelvis001/Base HumanLThigh/Base HumanLCalf
+        weight: 1
+      - path: Pelvis001/Base HumanLThigh/Base HumanLCalf/Base HumanLFoot
+        weight: 1
+      - path: Pelvis001/Base HumanRLegThigh
+        weight: 1
+      - path: Pelvis001/Base HumanRLegThigh/Base HumanRLegCalf
+        weight: 1
+      - path: Pelvis001/Base HumanRLegThigh/Base HumanRLegCalf/Base HumanRLegFoot
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1/Base HumanNeck2
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1/Base HumanNeck2/Base HumanNeck3
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1/Base HumanNeck2/Base HumanNeck3/Object011
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1/Base HumanNeck2/Base HumanNeck3/Object011/Crowd001
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanRArmCollarbone
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanRArmCollarbone/Base HumanRArmUpperarm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanRArmCollarbone/Base HumanRArmUpperarm/Base HumanRArmForearm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanRArmCollarbone/Base HumanRArmUpperarm/Base HumanRArmForearm/Base HumanRArmPalm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Object007
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Object007/Base
+          HumanLUpperarm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Object007/Base
+          HumanLUpperarm/Base HumanLForearm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Object007/Base
+          HumanLUpperarm/Base HumanLForearm/Object008
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Enemy_1_Attack_1
+      takeName: Enemy1_Rig_2_allAnim
+      firstFrame: 274
+      lastFrame: 315
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base Human
+        weight: 1
+      - path: Base HumanRLegPlatform
+        weight: 1
+      - path: Enemy1
+        weight: 1
+      - path: IKTarget001
+        weight: 1
+      - path: Pelvis001
+        weight: 1
+      - path: Pelvis001/Base HumanLThigh
+        weight: 1
+      - path: Pelvis001/Base HumanLThigh/Base HumanLCalf
+        weight: 1
+      - path: Pelvis001/Base HumanLThigh/Base HumanLCalf/Base HumanLFoot
+        weight: 1
+      - path: Pelvis001/Base HumanRLegThigh
+        weight: 1
+      - path: Pelvis001/Base HumanRLegThigh/Base HumanRLegCalf
+        weight: 1
+      - path: Pelvis001/Base HumanRLegThigh/Base HumanRLegCalf/Base HumanRLegFoot
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1/Base HumanNeck2
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1/Base HumanNeck2/Base HumanNeck3
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1/Base HumanNeck2/Base HumanNeck3/Object011
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1/Base HumanNeck2/Base HumanNeck3/Object011/Crowd001
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanRArmCollarbone
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanRArmCollarbone/Base HumanRArmUpperarm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanRArmCollarbone/Base HumanRArmUpperarm/Base HumanRArmForearm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanRArmCollarbone/Base HumanRArmUpperarm/Base HumanRArmForearm/Base HumanRArmPalm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Object007
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Object007/Base
+          HumanLUpperarm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Object007/Base
+          HumanLUpperarm/Base HumanLForearm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Object007/Base
+          HumanLUpperarm/Base HumanLForearm/Object008
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Enemy_1_Attack_2
+      takeName: Enemy1_Rig_2_allAnim
+      firstFrame: 357
+      lastFrame: 401
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base Human
+        weight: 1
+      - path: Base HumanRLegPlatform
+        weight: 1
+      - path: Enemy1
+        weight: 1
+      - path: IKTarget001
+        weight: 1
+      - path: Pelvis001
+        weight: 1
+      - path: Pelvis001/Base HumanLThigh
+        weight: 1
+      - path: Pelvis001/Base HumanLThigh/Base HumanLCalf
+        weight: 1
+      - path: Pelvis001/Base HumanLThigh/Base HumanLCalf/Base HumanLFoot
+        weight: 1
+      - path: Pelvis001/Base HumanRLegThigh
+        weight: 1
+      - path: Pelvis001/Base HumanRLegThigh/Base HumanRLegCalf
+        weight: 1
+      - path: Pelvis001/Base HumanRLegThigh/Base HumanRLegCalf/Base HumanRLegFoot
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1/Base HumanNeck2
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1/Base HumanNeck2/Base HumanNeck3
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1/Base HumanNeck2/Base HumanNeck3/Object011
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1/Base HumanNeck2/Base HumanNeck3/Object011/Crowd001
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanRArmCollarbone
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanRArmCollarbone/Base HumanRArmUpperarm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanRArmCollarbone/Base HumanRArmUpperarm/Base HumanRArmForearm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanRArmCollarbone/Base HumanRArmUpperarm/Base HumanRArmForearm/Base HumanRArmPalm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Object007
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Object007/Base
+          HumanLUpperarm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Object007/Base
+          HumanLUpperarm/Base HumanLForearm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Object007/Base
+          HumanLUpperarm/Base HumanLForearm/Object008
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Enemy_1_Hit
+      takeName: Enemy1_Rig_2_allAnim
+      firstFrame: 226
+      lastFrame: 273
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base Human
+        weight: 1
+      - path: Base HumanRLegPlatform
+        weight: 1
+      - path: Enemy1
+        weight: 1
+      - path: IKTarget001
+        weight: 1
+      - path: Pelvis001
+        weight: 1
+      - path: Pelvis001/Base HumanLThigh
+        weight: 1
+      - path: Pelvis001/Base HumanLThigh/Base HumanLCalf
+        weight: 1
+      - path: Pelvis001/Base HumanLThigh/Base HumanLCalf/Base HumanLFoot
+        weight: 1
+      - path: Pelvis001/Base HumanRLegThigh
+        weight: 1
+      - path: Pelvis001/Base HumanRLegThigh/Base HumanRLegCalf
+        weight: 1
+      - path: Pelvis001/Base HumanRLegThigh/Base HumanRLegCalf/Base HumanRLegFoot
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1/Base HumanNeck2
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1/Base HumanNeck2/Base HumanNeck3
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1/Base HumanNeck2/Base HumanNeck3/Object011
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1/Base HumanNeck2/Base HumanNeck3/Object011/Crowd001
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanRArmCollarbone
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanRArmCollarbone/Base HumanRArmUpperarm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanRArmCollarbone/Base HumanRArmUpperarm/Base HumanRArmForearm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanRArmCollarbone/Base HumanRArmUpperarm/Base HumanRArmForearm/Base HumanRArmPalm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Object007
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Object007/Base
+          HumanLUpperarm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Object007/Base
+          HumanLUpperarm/Base HumanLForearm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Object007/Base
+          HumanLUpperarm/Base HumanLForearm/Object008
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Enemy_1_Death
+      takeName: Enemy1_Rig_2_allAnim
+      firstFrame: 316
+      lastFrame: 355
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base Human
+        weight: 1
+      - path: Base HumanRLegPlatform
+        weight: 1
+      - path: Enemy1
+        weight: 1
+      - path: IKTarget001
+        weight: 1
+      - path: Pelvis001
+        weight: 1
+      - path: Pelvis001/Base HumanLThigh
+        weight: 1
+      - path: Pelvis001/Base HumanLThigh/Base HumanLCalf
+        weight: 1
+      - path: Pelvis001/Base HumanLThigh/Base HumanLCalf/Base HumanLFoot
+        weight: 1
+      - path: Pelvis001/Base HumanRLegThigh
+        weight: 1
+      - path: Pelvis001/Base HumanRLegThigh/Base HumanRLegCalf
+        weight: 1
+      - path: Pelvis001/Base HumanRLegThigh/Base HumanRLegCalf/Base HumanRLegFoot
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1/Base HumanNeck2
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1/Base HumanNeck2/Base HumanNeck3
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1/Base HumanNeck2/Base HumanNeck3/Object011
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1/Base HumanNeck2/Base HumanNeck3/Object011/Crowd001
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanRArmCollarbone
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanRArmCollarbone/Base HumanRArmUpperarm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanRArmCollarbone/Base HumanRArmUpperarm/Base HumanRArmForearm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanRArmCollarbone/Base HumanRArmUpperarm/Base HumanRArmForearm/Base HumanRArmPalm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Object007
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Object007/Base
+          HumanLUpperarm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Object007/Base
+          HumanLUpperarm/Base HumanLForearm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Object007/Base
+          HumanLUpperarm/Base HumanLForearm/Object008
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
