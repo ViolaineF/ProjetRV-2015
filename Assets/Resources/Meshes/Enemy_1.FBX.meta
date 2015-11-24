@@ -71,6 +71,8 @@ ModelImporter:
     7400008: Enemy_1_Attack_2
     7400010: Enemy_1_Hit
     7400012: Enemy_1_Death
+    7400014: Enemy_1_QuarterTurnLeft
+    7400016: Enemy_1_HalfTurnLeft
     9500000: //RootNode
     13700000: Enemy1
   materials:
@@ -680,6 +682,198 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base Human
+        weight: 1
+      - path: Base HumanRLegPlatform
+        weight: 1
+      - path: Enemy1
+        weight: 1
+      - path: IKTarget001
+        weight: 1
+      - path: Pelvis001
+        weight: 1
+      - path: Pelvis001/Base HumanLThigh
+        weight: 1
+      - path: Pelvis001/Base HumanLThigh/Base HumanLCalf
+        weight: 1
+      - path: Pelvis001/Base HumanLThigh/Base HumanLCalf/Base HumanLFoot
+        weight: 1
+      - path: Pelvis001/Base HumanRLegThigh
+        weight: 1
+      - path: Pelvis001/Base HumanRLegThigh/Base HumanRLegCalf
+        weight: 1
+      - path: Pelvis001/Base HumanRLegThigh/Base HumanRLegCalf/Base HumanRLegFoot
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1/Base HumanNeck2
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1/Base HumanNeck2/Base HumanNeck3
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1/Base HumanNeck2/Base HumanNeck3/Object011
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1/Base HumanNeck2/Base HumanNeck3/Object011/Crowd001
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanRArmCollarbone
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanRArmCollarbone/Base HumanRArmUpperarm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanRArmCollarbone/Base HumanRArmUpperarm/Base HumanRArmForearm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanRArmCollarbone/Base HumanRArmUpperarm/Base HumanRArmForearm/Base HumanRArmPalm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Object007
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Object007/Base
+          HumanLUpperarm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Object007/Base
+          HumanLUpperarm/Base HumanLForearm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Object007/Base
+          HumanLUpperarm/Base HumanLForearm/Object008
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Enemy_1_QuarterTurnLeft
+      takeName: Take 001
+      firstFrame: 400
+      lastFrame: 424
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base Human
+        weight: 1
+      - path: Base HumanRLegPlatform
+        weight: 1
+      - path: Enemy1
+        weight: 1
+      - path: IKTarget001
+        weight: 1
+      - path: Pelvis001
+        weight: 1
+      - path: Pelvis001/Base HumanLThigh
+        weight: 1
+      - path: Pelvis001/Base HumanLThigh/Base HumanLCalf
+        weight: 1
+      - path: Pelvis001/Base HumanLThigh/Base HumanLCalf/Base HumanLFoot
+        weight: 1
+      - path: Pelvis001/Base HumanRLegThigh
+        weight: 1
+      - path: Pelvis001/Base HumanRLegThigh/Base HumanRLegCalf
+        weight: 1
+      - path: Pelvis001/Base HumanRLegThigh/Base HumanRLegCalf/Base HumanRLegFoot
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1/Base HumanNeck2
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1/Base HumanNeck2/Base HumanNeck3
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1/Base HumanNeck2/Base HumanNeck3/Object011
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanNeck1/Base HumanNeck2/Base HumanNeck3/Object011/Crowd001
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanRArmCollarbone
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanRArmCollarbone/Base HumanRArmUpperarm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanRArmCollarbone/Base HumanRArmUpperarm/Base HumanRArmForearm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Base
+          HumanRArmCollarbone/Base HumanRArmUpperarm/Base HumanRArmForearm/Base HumanRArmPalm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Object007
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Object007/Base
+          HumanLUpperarm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Object007/Base
+          HumanLUpperarm/Base HumanLForearm
+        weight: 1
+      - path: Pelvis001/Base HumanSpine1/Base HumanSpine2/Base HumanSpine3/Object002/Object007/Base
+          HumanLUpperarm/Base HumanLForearm/Object008
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Enemy_1_HalfTurnLeft
+      takeName: Take 001
+      firstFrame: 450
+      lastFrame: 490
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
