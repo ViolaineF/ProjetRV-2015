@@ -53,11 +53,21 @@ public class Hero_1 : MonoBehaviour
 	public float m_Post_stam;                // stamina of defensive posture and wind shield
 	public float m_TimerAtk;
 	public Transform m_Target;
-	HUD hud_script;
+	HUD_Health hud_ScriptHealth;
+	HUD_Stamina hud_ScriptStamina;
+
 
 	void Start()
 	{
-		m_HUD.GetComponent<HUD>().CurrentHealth = m_PV;
+		hud_ScriptHealth = m_HUD.GetComponent<HUD_Health> ();
+		hud_ScriptStamina = m_HUD.GetComponent<HUD_Stamina> ();
+
+		hud_ScriptHealth.CurrentHealth = m_PV;
+		hud_ScriptStamina.CurrentStamina1 = m_Atk1_stam;
+		hud_ScriptStamina.CurrentStamina2 = m_Atk2_stam;
+		hud_ScriptStamina.CurrentStamina3 = m_Atk3_stam;
+
+
 		m_Animator = GetComponent<Animator>();
 		m_Rigidbody = GetComponent<Rigidbody>();
 		m_Capsule = GetComponent<CapsuleCollider>();
@@ -66,7 +76,7 @@ public class Hero_1 : MonoBehaviour
 		AudioSource PlayerSFx = GetComponent<AudioSource>();
 		m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 		m_OrigGroundCheckDistance = m_GroundCheckDistance;
-		hud_script = m_HUD.GetComponent<HUD> ();
+
 		m_Dart = Instantiate(Resources.Load("Dart", typeof(GameObject))) as Rigidbody;
 		m_Dart = Resources.Load("Dart") as Rigidbody;
 
@@ -76,15 +86,18 @@ public class Hero_1 : MonoBehaviour
 		m_PVmax = 100;
 		m_PV = 100;
 		m_Strenght = 5;
-		m_Atk1_stam = 2;            
-		m_Atk2_stam = 2;               
-		m_Atk3_stam = 2;               
+		m_Atk1_stam = 9;            
+		m_Atk2_stam = 9;               
+		m_Atk3_stam = 9;               
 		m_Post_stam = 4;
 	}
 
-	void update()
+	void Update()
 	{
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		hud_ScriptStamina.CurrentStamina1 = m_Atk1_stam;
+		hud_ScriptStamina.CurrentStamina2 = m_Atk2_stam;
+		hud_ScriptStamina.CurrentStamina3 = m_Atk3_stam;
 	}
 
 	public void Move(Vector3 move, bool crouch, bool jump, bool m_Atk01, bool m_Atk02, bool m_Atk03, bool m_Posture )
@@ -98,22 +111,22 @@ public class Hero_1 : MonoBehaviour
 			m_TimerAtk += Time.deltaTime;	
 			LifeSafetyCooldown += Time.deltaTime;
 			// define a timer to prevent atk_1 spamming
-			if (m_Atk1_stam < 3)
+			if (m_Atk1_stam < 9)
 				m_Atk1_stam += Time.deltaTime;	
 			else
-				m_Atk1_stam = 3;
+				m_Atk1_stam = 9;
 
 			// define a timer to prevent atk_2 spamming
-			if (m_Atk2_stam < 2)	
+			if (m_Atk2_stam < 9)	
 				m_Atk2_stam += Time.deltaTime;	
 			else
-				m_Atk2_stam = 3;
+				m_Atk2_stam = 9;
 
 			// define a timer to prevent atk_2 spamming
-			if (m_Atk3_stam < 1)	
+			if (m_Atk3_stam < 9)	
 				m_Atk3_stam += Time.deltaTime;	
 			else
-				m_Atk3_stam = 3;
+				m_Atk3_stam = 9;
 
 			if (move.magnitude > 1f)
 				move.Normalize ();
@@ -136,10 +149,10 @@ public class Hero_1 : MonoBehaviour
 			if (m_Attacking_1 && m_Atk1_stam >= 1) {
 				AttackCommand_1 ();
 			}
-			if (m_Attacking_2 && m_Atk2_stam >= 1) {
+			if (m_Attacking_2 && m_Atk2_stam >= 5) {
 				AttackCommand_2 ();
 			}
-			if (m_Attacking_3 && m_Atk3_stam >= 1) {
+			if (m_Attacking_3 && m_Atk3_stam >= 9) {
 				m_Attacking_3= true;
 				AttackCommand_3 ();
 			}
@@ -160,7 +173,6 @@ public class Hero_1 : MonoBehaviour
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////			
 		}
-			
 		else {
 			StartCoroutine(timerDestroy());
 		}
@@ -182,12 +194,10 @@ public class Hero_1 : MonoBehaviour
 			}
 
 //			float m_PV_float = (float)m_PV;
-			hud_script.currentDammage = dammage;
-
-			hud_script.CurrentHealth = m_PV;
+			hud_ScriptHealth.currentDammage = dammage;
+			hud_ScriptHealth.CurrentHealth = m_PV;
 		}
 	}
-
 
 	public void GetLife(int cure)
 	{
@@ -195,7 +205,7 @@ public class Hero_1 : MonoBehaviour
 		if (m_PV > m_PVmax)
 			m_PV = m_PVmax;
 //		float m_PV_float = (float)m_PV;
-		hud_script.CurrentHealth = m_PV;
+		hud_ScriptHealth.CurrentHealth = m_PV;
 	}
 
 
@@ -241,9 +251,10 @@ public class Hero_1 : MonoBehaviour
 
 	void AttackCommand_1()
 	{			
-		if (!m_Crouching && m_TimerAtk >= 1)
+		if (!m_Crouching && m_TimerAtk >= 0.5f)
 		{
 			m_Atk1_stam = m_Atk1_stam - 1;
+			hud_ScriptStamina.CurrentStamina1 = m_Atk1_stam;
 			m_TimerAtk = 0;
 
 			Rigidbody clone;
@@ -259,6 +270,7 @@ public class Hero_1 : MonoBehaviour
 				clone = Instantiate(m_Dart, m_Attack1_sp_simple.transform.position, m_Attack1_sp_simple.transform.rotation) as Rigidbody;
 				clone.velocity = m_Attack1_sp_simple.transform.TransformDirection(Vector3.forward * 10);
 			}
+
 //			transform.position = Vector3.MoveTowards(transform.position, m_Attack_sp.transform.position, Time.deltaTime * 50f);
 //			clone.velocity = m_Attack_sp.transform.TransformDirection(GetMousePositionInPlaneOfLauncher() * 2);
 		}
@@ -285,7 +297,8 @@ public class Hero_1 : MonoBehaviour
 	{
 		if (!m_Crouching && m_TimerAtk >= 1)
 		{
-			m_Atk2_stam = m_Atk2_stam - 1;
+			m_Atk2_stam = m_Atk2_stam - 5;
+			hud_ScriptStamina.CurrentStamina2 = m_Atk2_stam;
 			m_TimerAtk = 0;
 			Rigidbody clone;
 			clone = Instantiate(m_SkillWind01, m_Attack2_sp.transform.position, m_Attack2_sp.transform.rotation) as Rigidbody;

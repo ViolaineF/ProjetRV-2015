@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class HUD : MonoBehaviour {
+public class HUD_Health : MonoBehaviour {
 
 
 //	explanations on https://www.youtube.com/watch?v=NgftVg3idB4
@@ -21,7 +21,6 @@ public class HUD : MonoBehaviour {
 			HandleHealth();
 		}
 	}
-
 	public int maxHealth;
 	public Image visualHealth;
 	public GameObject player;
@@ -42,7 +41,6 @@ public class HUD : MonoBehaviour {
 	{
 		healthText.text = "Life : " + currentHealth;
 		float currentXValue = mapValues (currentHealth, 0, maxHealth, minXValue, maxXValue);
-		Debug.Log ("currentXValue : " + currentXValue);
 
 //		healthTransform.localPosition = new Vector3 (currentXValue, cachedY);
 		StartCoroutine(MoveFunction(currentXValue));
@@ -51,11 +49,11 @@ public class HUD : MonoBehaviour {
 
 		if(currentHealth > maxHealth/2) // more than 50% of health
 		{
-			visualHealth.color = new Color32((byte)mapValues(currentHealth, maxHealth / 2, maxHealth, 255 , 0), 255, 0, 255);
+			visualHealth.color = new Color32((byte)mapValues(currentHealth, maxHealth / 2, maxHealth, 255 , 0), 255, 100, 150);
 		}
 		else
 		{
-			visualHealth.color = new Color32(255,(byte)mapValues(currentHealth, 0, maxHealth / 2 ,0 , 255), 0, 255);
+			visualHealth.color = new Color32(255,(byte)mapValues(currentHealth, 0, maxHealth / 2 ,0 , 255), 100, 150);
 		}
 	}
 
