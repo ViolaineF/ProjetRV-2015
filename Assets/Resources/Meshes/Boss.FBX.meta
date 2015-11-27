@@ -1,0 +1,230 @@
+fileFormatVersion: 2
+guid: e0c6b86395dc67849a56ca532b4b500f
+timeCreated: 1448553196
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: ArcadeCrowd_l
+    100002: ArcadeCrowd_r
+    100004: baseMouth
+    100006: baseSkull
+    100008: //RootNode
+    100010: Eye_l
+    100012: Eye_l005
+    100014: Eye_m
+    100016: Head
+    100018: NoseCrowd
+    100020: Ring
+    100022: SkinEye_l
+    100024: SkinEye_m
+    100026: SkinEye_r
+    400000: ArcadeCrowd_l
+    400002: ArcadeCrowd_r
+    400004: baseMouth
+    400006: baseSkull
+    400008: //RootNode
+    400010: Eye_l
+    400012: Eye_l005
+    400014: Eye_m
+    400016: Head
+    400018: NoseCrowd
+    400020: Ring
+    400022: SkinEye_l
+    400024: SkinEye_m
+    400026: SkinEye_r
+    2300000: Eye_l
+    2300002: Eye_l005
+    2300004: Eye_m
+    2300006: Ring
+    3300000: Eye_l
+    3300002: Eye_l005
+    3300004: Eye_m
+    3300006: Ring
+    4300000: Head
+    4300002: SkinEye_l
+    4300004: Eye_m
+    4300006: Eye_l
+    4300008: SkinEye_m
+    4300010: Ring
+    4300012: SkinEye_r
+    4300014: Eye_l005
+    7400000: Boss_Idle
+    7400002: Boss_Attack
+    9500000: //RootNode
+    13700000: Head
+    13700002: SkinEye_l
+    13700004: SkinEye_m
+    13700006: SkinEye_r
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Boss_Idle
+      takeName: Boss_withRig
+      firstFrame: 50
+      lastFrame: 160
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: baseSkull
+        weight: 1
+      - path: baseSkull/ArcadeCrowd_l
+        weight: 1
+      - path: baseSkull/ArcadeCrowd_r
+        weight: 1
+      - path: baseSkull/baseMouth
+        weight: 1
+      - path: baseSkull/NoseCrowd
+        weight: 1
+      - path: Eye_l005
+        weight: 1
+      - path: Head
+        weight: 1
+      - path: Head/Eye_l
+        weight: 1
+      - path: Head/Eye_m
+        weight: 1
+      - path: Head/Ring
+        weight: 1
+      - path: Head/SkinEye_l
+        weight: 1
+      - path: Head/SkinEye_m
+        weight: 1
+      - path: Head/SkinEye_r
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Boss_Attack
+      takeName: Boss_withRig
+      firstFrame: 0
+      lastFrame: 50
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: baseSkull
+        weight: 1
+      - path: baseSkull/ArcadeCrowd_l
+        weight: 1
+      - path: baseSkull/ArcadeCrowd_r
+        weight: 1
+      - path: baseSkull/baseMouth
+        weight: 1
+      - path: baseSkull/NoseCrowd
+        weight: 1
+      - path: Eye_l005
+        weight: 1
+      - path: Head
+        weight: 1
+      - path: Head/Eye_l
+        weight: 1
+      - path: Head/Eye_m
+        weight: 1
+      - path: Head/Ring
+        weight: 1
+      - path: Head/SkinEye_l
+        weight: 1
+      - path: Head/SkinEye_m
+        weight: 1
+      - path: Head/SkinEye_r
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
