@@ -76,7 +76,7 @@ public class HUD_Stamina : MonoBehaviour {
 		float curentStam1XValue = mapValues (currentStamina1, 0, maxStam1, s1minXValue, s1maxXValue);
 		float curentStam2XValue = mapValues (currentStamina2, 0, maxStam2, s2minXValue, s2maxXValue);
 		float curentStam3XValue = mapValues (currentStamina3, 0, maxStam3, s3minXValue, s3maxXValue);
-		Debug.Log ("currentStamina1 : " + currentStamina1);
+
 		//		healthTransform.localPosition = new Vector3 (currentXValue, cachedY);
 		StartCoroutine(MoveFunction(curentStam1XValue, stam1Transform, s1cachedY));
 		StartCoroutine(MoveFunction(curentStam2XValue, stam2Transform, s2cachedY));

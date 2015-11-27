@@ -43,7 +43,7 @@ public class Enemy01 : MonoBehaviour
 	public float m_Atk1_stam;                  // stamina of m_Atk1
 	public float m_Atk2_stam;                  // stamina of m_Atk2
 	public float m_Post_stam;                // stamina of defensive posture and wind shield
-	public float m_TimerAtk;
+	public float m_TimerAtk;					// global timer for attacks
 
 	void Start()
 	{
