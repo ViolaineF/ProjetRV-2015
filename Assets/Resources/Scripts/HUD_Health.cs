@@ -11,7 +11,6 @@ public class HUD_Health : MonoBehaviour {
 	private float cachedY;
 	private float minXValue;
 	private float maxXValue;
-	public Text healthText;
 	public int currentHealth;
 	public int currentDammage;
 	public int CurrentHealth
@@ -39,7 +38,6 @@ public class HUD_Health : MonoBehaviour {
 
 	private void HandleHealth()
 	{
-		healthText.text = "Life : " + currentHealth;
 		float currentXValue = mapValues (currentHealth, 0, maxHealth, minXValue, maxXValue);
 
 //		healthTransform.localPosition = new Vector3 (currentXValue, cachedY);

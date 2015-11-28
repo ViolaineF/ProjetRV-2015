@@ -63,13 +63,15 @@ public class Hero_1_UserControl : MonoBehaviour
 					Renderer rend = rcHit.transform.GetComponent<Renderer>();
 					if(rend != null)
 					{
-						rend.material.color = Color.white;
+						rend.material.color = Color.red;
 //						StartCoroutine (FadeSelection());
 					}
+
+
 					rend = rcHit.transform.GetComponentInChildren<Renderer>();
 					if(rend != null)
 					{
-						rend.material.color = Color.white;
+						rend.material.color = Color.red;
 						//						StartCoroutine (FadeSelection());
 					}
 

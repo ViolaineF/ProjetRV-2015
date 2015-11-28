@@ -8,7 +8,23 @@ public class Bonus : MonoBehaviour {
 	public int BonusPoint = 1;
 	// Use this for initialization
 	void Start () {
-	
+		Renderer rend = transform.GetComponent<Renderer>();
+
+		if(BonusType == 1)
+		{
+			rend.material.color = new Color32(255, 120, 0, 20); //	fire color
+		}
+		
+		else if(BonusType == 2)
+		{
+			rend.material.color = new Color32(255, 120, 0, 20); //	fire color
+		}
+		
+		else if(BonusType == 3)
+		{
+			rend.material.color = new Color32(50, 200, 40, 20); //	wood color
+		}
+
 	}
 
 	void OnTriggerEnter (Collider col)
@@ -32,6 +48,7 @@ public class Bonus : MonoBehaviour {
 			{
 				playerScript.m_Speed = playerScript.m_Speed + BonusPoint/10;
 			}
+
 			Rigidbody clone;
 			clone = Instantiate(b_Particles, transform.position, transform.rotation) as Rigidbody;
 			
