@@ -15,7 +15,6 @@ public class E_Atk_01 : MonoBehaviour {
 	{
 		if(col.gameObject.tag == "Player")
 		{
-			Debug.Log ("coll");
 			col.gameObject.GetComponent<Hero_1>().LooseLife(power);
 		}
 	}

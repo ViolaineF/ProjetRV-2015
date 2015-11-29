@@ -15,7 +15,6 @@ public class B_Atk_Laser : MonoBehaviour {
 	{
 		if(col.gameObject.tag == "Player")
 		{
-			Debug.Log ("coll");
 			col.gameObject.GetComponent<Hero_1>().LooseLife(power);
 		}
 	}

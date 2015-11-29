@@ -14,7 +14,10 @@ public class Hero_1 : MonoBehaviour
 
 	AudioSource PlayerSFx;
 	public AudioClip footStep;
-	public AudioClip hit;
+	public AudioClip fx_Hit;
+	public AudioClip fx_Dead;
+	public AudioClip fx_atk1;
+	public AudioClip fx_atk2;
 	public GameObject m_Attack1_sp_simple;
 	public GameObject m_Attack1_sp_target;
 	public GameObject m_Attack2_sp;
@@ -35,24 +38,27 @@ public class Hero_1 : MonoBehaviour
 	float m_CapsuleHeight;
 	Vector3 m_CapsuleCenter;
 	CapsuleCollider m_Capsule;
-	bool m_Dead;
-	bool m_Hit;
+
 	bool m_Crouching;
 	bool m_Attacking_1;
 	bool m_Attacking_2;
 	bool m_Attacking_3;
 	bool m_Def_Posture;
 	float LifeSafetyCooldown;
-	public int m_PVmax;
-	public int m_PV;                         // life amount
-	public int m_Strenght;                   // Strenght amount
-	public int m_Speed; 
-	public float m_Atk1_stam;                  // stamina of attack_1
-	public float m_Atk2_stam;                  // stamina of attack_2
-	public float m_Atk3_stam;                  // stamina of attack_3
-	public float m_Post_stam;                // stamina of defensive posture and wind shield
-	public float m_TimerAtk;
-	public Transform m_Target;
+
+	// Player stats
+	public int m_Defense; // Defense amount
+	public int m_PVmax; // life max
+	public int m_PV; // life amount
+	public int m_Strenght; // Strenght amount
+	public int m_Speed;  
+	public float m_Atk1_stam; // stamina of attack_1
+	public float m_Atk2_stam; // stamina of attack_2
+	public float m_Atk3_stam; // stamina of attack_3
+	public float m_Post_stam; // stamina of defensive posture and wind shield
+	public float m_TimerAtk; // timer to prevent attack spaming 
+
+	public Transform m_Target; // enemy defined on click to aim attacks on it 
 	HUD_Health hud_ScriptHealth;
 	HUD_Stamina hud_ScriptStamina;
 
@@ -73,7 +79,7 @@ public class Hero_1 : MonoBehaviour
 		m_Capsule = GetComponent<CapsuleCollider>();
 		m_CapsuleHeight = m_Capsule.height;
 		m_CapsuleCenter = m_Capsule.center;
-		AudioSource PlayerSFx = GetComponent<AudioSource>();
+		PlayerSFx = GetComponent<AudioSource>();
 		m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 		m_OrigGroundCheckDistance = m_GroundCheckDistance;
 
@@ -86,6 +92,7 @@ public class Hero_1 : MonoBehaviour
 		m_PVmax = 100;
 		m_PV = 100;
 		m_Strenght = 5;
+		m_Defense = 2;
 		m_Atk1_stam = 9;            
 		m_Atk2_stam = 9;               
 		m_Atk3_stam = 9;               
@@ -169,7 +176,6 @@ public class Hero_1 : MonoBehaviour
 			
 			// send input and other state parameters to the animator
 			UpdateAnimator (move);
-			m_Hit = false;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////			
 		}
@@ -181,16 +187,16 @@ public class Hero_1 : MonoBehaviour
 	public void LooseLife(int dammage)
 	{
 		if (LifeSafetyCooldown > 1) {
-			m_Hit = true;
-			m_PV = m_PV - dammage;
-
-			Debug.Log (LifeSafetyCooldown);
+			m_Animator.SetTrigger("Hit");
+			m_PV = m_PV - (dammage - m_Defense);
+			StartCoroutine(PlaySFx(fx_Hit));
 
 			LifeSafetyCooldown = 0;
 
 			if(m_PV <= 0)
 			{
-				m_Dead = true;
+				m_Animator.SetTrigger("Dead");
+				StartCoroutine(PlaySFx(fx_Dead));
 			}
 
 //			float m_PV_float = (float)m_PV;
@@ -258,40 +264,37 @@ public class Hero_1 : MonoBehaviour
 			m_TimerAtk = 0;
 
 			Rigidbody clone;
-			if (m_Target != null && m_Target.gameObject.tag == "Enemy")
+			if (m_Target != null && m_Target.gameObject.tag == "Enemy" || m_Target != null && m_Target.gameObject.tag == "Boss")
 			{
+				// instantiate a projectile to the target
+
 				Vector3 targetDir = (m_Target.transform.position - transform.position);
-				clone = Instantiate(m_Dart, m_Attack1_sp_target.transform.position, m_Attack1_sp_target.transform.rotation) as Rigidbody;
-				clone.velocity = m_Attack1_sp_target.transform.TransformDirection(targetDir * 2);
+				if(targetDir.x < 0)
+				{
+					clone = Instantiate(m_Dart, m_Attack1_sp_target.transform.position, m_Attack1_sp_target.transform.rotation) as Rigidbody;
+					clone.velocity = m_Attack1_sp_target.transform.TransformDirection(targetDir * 2);
+				}
+				else if(targetDir.x > 0)
+				{
+					targetDir.x = -targetDir.x;
+					clone = Instantiate(m_Dart, m_Attack1_sp_target.transform.position, m_Attack1_sp_target.transform.rotation) as Rigidbody;
+					clone.velocity = m_Attack1_sp_target.transform.TransformDirection(targetDir * 2);
+				}
 				m_Target = null;
 			}
 			else if (m_Target == null)
 			{
+				// instantiate a projectile forward
+
 				clone = Instantiate(m_Dart, m_Attack1_sp_simple.transform.position, m_Attack1_sp_simple.transform.rotation) as Rigidbody;
 				clone.velocity = m_Attack1_sp_simple.transform.TransformDirection(Vector3.forward * 10);
 			}
 
-//			transform.position = Vector3.MoveTowards(transform.position, m_Attack_sp.transform.position, Time.deltaTime * 50f);
-//			clone.velocity = m_Attack_sp.transform.TransformDirection(GetMousePositionInPlaneOfLauncher() * 2);
+			StartCoroutine(PlaySFx(fx_atk1));
+
 		}
 	}
 
-
-
-	/*
-	public Vector3 GetMousePositionInPlaneOfLauncher () {
-		Plane p = new Plane(transform.forward, transform.position);
-		Ray r = Camera.main.ScreenPointToRay(Input.mousePosition);
-		float d;
-		if(p.Raycast(r, out d)) {
-			Vector3 v = r.GetPoint(d);
-			return v;
-		}
-
-
-		throw new UnityException("Mouse position ray not intersecting launcher plane");
-	}
-	*/
 
 	void AttackCommand_2()
 	{
@@ -300,9 +303,14 @@ public class Hero_1 : MonoBehaviour
 			m_Atk2_stam = m_Atk2_stam - 5;
 			hud_ScriptStamina.CurrentStamina2 = m_Atk2_stam;
 			m_TimerAtk = 0;
+
+			// instantiate a projectile
 			Rigidbody clone;
 			clone = Instantiate(m_SkillWind01, m_Attack2_sp.transform.position, m_Attack2_sp.transform.rotation) as Rigidbody;
 			clone.velocity = m_Attack2_sp.transform.TransformDirection(Vector3.forward * 10);
+
+			StartCoroutine(PlaySFx(fx_atk2));
+
 		}
 	}
 
@@ -330,7 +338,6 @@ public class Hero_1 : MonoBehaviour
 		m_Animator.SetBool("Attack02", m_Attacking_2);
 		m_Animator.SetBool("Attack03", m_Attacking_3);
 		m_Animator.SetBool("Posture", m_Def_Posture);
-		m_Animator.SetBool("Hit", m_Hit);
 
 
 		if (!m_IsGrounded)
@@ -442,6 +449,8 @@ public class Hero_1 : MonoBehaviour
 	}
 
 
+	// coroutines //
+
 	IEnumerator timerDestroy()
 	{
 		m_Animator.SetBool("Dead", true);
@@ -449,6 +458,13 @@ public class Hero_1 : MonoBehaviour
 		Destroy(this.gameObject);
 	}
 
+	// Play sound during its length //
+	IEnumerator PlaySFx(AudioClip soundFx) {
+
+		PlayerSFx.clip = soundFx;
+		PlayerSFx.Play();
+		yield return new WaitForSeconds(PlayerSFx.clip.length);
+	}
 
 	/*
 	void OnCollisionEnter (Collision col)

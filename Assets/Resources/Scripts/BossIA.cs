@@ -3,13 +3,20 @@ using System.Collections;
 
 public class BossIA : MonoBehaviour {
 
+	AudioSource BossSFx;
+	public AudioClip[] fx_idle1;
+	public AudioClip[] fx_Hit;
+	public AudioClip fx_Dead;
+	public AudioClip fx_atk1;
+	public AudioClip fx_atk2;
+
 	Animator m_Animator;
-	bool m_Death;
-	bool m_Dead;
 	bool m_Hit;
 	bool m_Attacking_1;	
-	int m_PV;                         // life amount
-	int m_Strenght;                   // Strenght amount
+
+	public int m_PV;                         // life amount
+	public int m_Strenght;                   // Strenght amount
+
 	//public int m_Speed; 
 	public GameObject m_Attack_sp;
 	public GameObject Death_Particle;
@@ -42,16 +49,13 @@ public class BossIA : MonoBehaviour {
 	void Start () {
 
 		target = GameObject.FindGameObjectWithTag("Player").transform;
-
+		BossSFx = this.GetComponent<AudioSource>();
 		m_Animator = GetComponent<Animator>();
-		m_PV = 25;
-		m_Death = false;
-		m_Dead = false;
 		m_Hit = false;
 		atkCoolDown = 5;
+		StartCoroutine(PlaySFx(fx_Dead));
 
 		m_IsAttacking = true;
-
 		StartCoroutine (AttacksIA());
 	}
 
@@ -95,16 +99,7 @@ public class BossIA : MonoBehaviour {
 		//Check if the Boss is dead
 		else if(m_PV <= 0)
 		{
-			if(m_Dead == true){
-
-			}
-			else {
-				m_Animator.SetTrigger("T_Death");
-				m_Dead = true;
-				
-				m_IsAttacking = false;
-				StopCoroutine(AttacksIA());
-			}
+			m_IsAttacking = false;
 		}
 		else {
 			m_TimerAtk += Time.deltaTime;
@@ -123,13 +118,20 @@ public class BossIA : MonoBehaviour {
 		m_PV = m_PV - dammage;
 		m_Hit = true;
 		m_TimerAtk = 0;
-		if(m_PV <= 0)
-		{
+		if (m_PV <= 0) {
 			GameObject Death_P_Clone;
-			Death_P_Clone = Instantiate(Death_Particle, m_Attack_sp.transform.position, m_Attack_sp.transform.rotation) as GameObject;
+			Death_P_Clone = Instantiate (Death_Particle, m_Attack_sp.transform.position, m_Attack_sp.transform.rotation) as GameObject;
+			m_Animator.SetTrigger ("T_Death");
+			StopCoroutine(AttacksIA());
+
+			StartCoroutine(PlaySFx(fx_Dead));
+			StartCoroutine (timerDestroy ());
+		} 
+		else {
 			m_Animator.SetTrigger("T_Hit");
-			
-			StartCoroutine(timerDestroy());
+
+			StartCoroutine(PlaySFx(fx_Hit [Random.Range (0, 2)]));
+
 		}
 	}
 
@@ -143,14 +145,16 @@ public class BossIA : MonoBehaviour {
 			if (RandomAtk == 0)
 			{
 				StartCoroutine(AttacksIA());
+				m_Atk1_stam = 0;
+
 			}
 			
 			else if (RandomAtk == 1)
 			{
 				StartCoroutine(AttacksIA());
+
 			}
 			
-			m_Atk1_stam = 0;
 			m_TimerAtk = 0;
 //			clone.velocity = m_Attack_sp.transform.TransformDirection(Vector3.forward * 10);
 		}
@@ -180,22 +184,37 @@ public class BossIA : MonoBehaviour {
 
 				// Change anim state
 				m_Attacking_1 = true;
-				Debug.Log("attack ! " + Time.time);
+
+				// PlaySound
+				StartCoroutine(PlaySFx(fx_atk2));
+				
 			}
 			else if(atkType > atk01_chance && atkType < (atk01_chance+atk02_chance)){  // launch a type 2 attack
 				m_Animator.SetTrigger("T_Attack02");
-
+				// PlaySound
+				StartCoroutine(PlaySFx(fx_atk2));
 			}
 			// Wait for the next attack to be launched
 			yield return new WaitForSeconds (atkCoolDown);
 		}
 	}
 
-
+	
+	// coroutines //
+	
 	IEnumerator timerDestroy()
 	{
-		yield return new WaitForSeconds(3);
+		yield return new WaitForSeconds(5);
 		Destroy(this.gameObject);
 	}
 	
+	// Play sound during its length //
+	IEnumerator PlaySFx(AudioClip soundFx) 
+	{
+		BossSFx.clip = soundFx;
+		BossSFx.Play();
+		yield return new WaitForSeconds(BossSFx.clip.length);
+	}
+
+
 }

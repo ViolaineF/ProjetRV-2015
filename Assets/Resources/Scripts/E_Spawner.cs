@@ -17,8 +17,6 @@ public class E_Spawner : MonoBehaviour {
 	{
 		if(col.gameObject.tag == "Player")
 		{
-			Debug.Log ("coll");
-
 			for (int i = 0; i < nb_E1; i++)
 			{
 				GameObject clone;
@@ -34,12 +32,6 @@ public class E_Spawner : MonoBehaviour {
 			}
 			StartCoroutine (timerDestroy());
 		}
-	}
-
-	IEnumerator SpawnDelay(GameObject type)
-	{			
-		yield return new WaitForSeconds(1);
-		Destroy (this.gameObject);
 	}
 
 	IEnumerator timerDestroy()
