@@ -1,25 +1,38 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MovingPlateform : MonoBehaviour {
+public class MovingPlatform : MonoBehaviour {
 
 	public Transform marker1;
 	public Transform marker2;
 	bool switchMarker;
 	public float MaxWaitTime;
-	// Use this for initialization
+
 	void Start () {
 		switchMarker = false;
 	}
 	
-	// Update is called once per frame
 	void Update () {
 			StartCoroutine(MoveFunction());
 	}
 
+	// Move the platform
 
+	void OnCollisionEnter (Collision col)
+	{
+		if(col.gameObject.tag == "Player")
+		{
+			col.transform.parent = transform;
+		}
+	}
 
-
+	void OnCollisionExit (Collision col)
+	{
+		if(col.gameObject.tag == "Player")
+		{
+			col.transform.parent = null;
+		}
+	}
 
 
 	IEnumerator MoveFunction()
@@ -61,4 +74,6 @@ public class MovingPlateform : MonoBehaviour {
 			// If the object has arrived, stop the coroutine
 			// Otherwise, continue next frame
 	}
+
+
 }
