@@ -176,7 +176,6 @@ public class Hero_1 : MonoBehaviour
 			
 			// send input and other state parameters to the animator
 			UpdateAnimator (move);
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////			
 		}
 		else {
@@ -339,7 +338,6 @@ public class Hero_1 : MonoBehaviour
 		m_Animator.SetBool("Attack03", m_Attacking_3);
 		m_Animator.SetBool("Posture", m_Def_Posture);
 
-
 		if (!m_IsGrounded)
 		{
 			m_Animator.SetFloat("Jump", m_Rigidbody.velocity.y);
@@ -352,11 +350,12 @@ public class Hero_1 : MonoBehaviour
 			Mathf.Repeat(
 				m_Animator.GetCurrentAnimatorStateInfo(0).normalizedTime + m_RunCycleLegOffset, 1);
 		float jumpLeg = (runCycle < k_Half ? 1 : -1) * m_ForwardAmount;
+
 		if (m_IsGrounded)
 		{
 			m_Animator.SetFloat("JumpLeg", jumpLeg);
 		}
-		
+		/*
 		// the anim speed multiplier allows the overall speed of walking/running to be tweaked in the inspector,
 		// which affects the movement speed because of the root motion.
 		if (m_IsGrounded && move.magnitude > 0)
@@ -368,6 +367,7 @@ public class Hero_1 : MonoBehaviour
 			// don't use that while airborne
 			m_Animator.speed = 1;
 		}
+		*/
 	}
 	
 	
@@ -409,9 +409,9 @@ public class Hero_1 : MonoBehaviour
 		if (m_IsGrounded && Time.deltaTime > 0)
 		{
 			Vector3 v = (m_Animator.deltaPosition * m_MoveSpeedMultiplier * m_Speed) / Time.deltaTime;
-			
+
 			// we preserve the existing y part of the current velocity.
-			v.y = m_Rigidbody.velocity.y;
+//			v.y = m_Rigidbody.velocity.y;
 			m_Rigidbody.velocity = v;
 		}
 	}

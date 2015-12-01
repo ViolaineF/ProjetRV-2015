@@ -18,7 +18,6 @@ public class Hero_1_UserControl : MonoBehaviour
 	public GameObject M_PauseMenu;
 	Transform target;
 	
-
 	public bool RaycastMouse(out RaycastHit hit)
 	{
 		bool rayHit = false;
@@ -37,17 +36,9 @@ public class Hero_1_UserControl : MonoBehaviour
 		{
 			m_Cam = Camera.main.transform;
 		}
-		else
-		{
-			Debug.LogWarning(
-				"Warning: no main camera found. Third person character needs a Camera tagged \"MainCamera\", for camera-relative controls.");
-			// we use self-relative controls in this case, which probably isn't what the user wants, but hey, we warned them!
-		}
-		
 		// get the third person character ( this should never be null due to require component )
 		m_Character = GetComponent<Hero_1>();
 	}
-	
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -67,30 +58,23 @@ public class Hero_1_UserControl : MonoBehaviour
 //						StartCoroutine (FadeSelection());
 					}
 
-
 					rend = rcHit.transform.GetComponentInChildren<Renderer>();
 					if(rend != null)
 					{
 						rend.material.color = Color.red;
 						//						StartCoroutine (FadeSelection());
 					}
-
 					target = rcHit.transform;
 					Debug.Log (target.name);
 				}
 			}
 		}
-
 		if (!m_Jump)
 		{
 			m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
 		}
 	}
 
-
-
-
-	
 	// Fixed update is called in sync with physics
 	private void FixedUpdate()
 	{
@@ -124,11 +108,7 @@ public class Hero_1_UserControl : MonoBehaviour
 //				m_Move = v*Vector3.forward + h*Vector3.right;
 			m_Move = h*Vector3.right;
 		}
-		#if !MOBILE_INPUT
-		// walk speed multiplier
-		if (Input.GetKey(KeyCode.LeftShift)) m_Move *= 0.5f;
-		#endif
-		
+
 		// pass all parameters to the character control script
 		m_Character.Move(m_Move, crouch, m_Jump, m_Atk01, m_Atk02, m_Atk03, m_Posture);
 		m_Jump = false;
