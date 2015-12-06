@@ -19,6 +19,7 @@ ModelImporter:
     100022: SkinEye_l
     100024: SkinEye_m
     100026: SkinEye_r
+    100028: Eye_r
     400000: ArcadeCrowd_l
     400002: ArcadeCrowd_r
     400004: baseMouth
@@ -33,6 +34,7 @@ ModelImporter:
     400022: SkinEye_l
     400024: SkinEye_m
     400026: SkinEye_r
+    400028: Eye_r
     2300000: Eye_l
     2300002: Eye_l005
     2300004: Eye_m
@@ -49,13 +51,23 @@ ModelImporter:
     4300010: Ring
     4300012: SkinEye_r
     4300014: Eye_l005
+    4300016: Eye_r
     7400000: Boss_Idle
-    7400002: Boss_Attack
+    7400002: Boss_Attack1
+    7400004: Boss_Attack2
+    7400006: Boss_Hit1
+    7400008: Boss_Hit2
+    7400010: Boss_Attack3
+    7400012: Boss_Death
     9500000: //RootNode
     13700000: Head
     13700002: SkinEye_l
     13700004: SkinEye_m
     13700006: SkinEye_r
+    13700008: Eye_l
+    13700010: Eye_m
+    13700012: Eye_r
+    13700014: Ring
   materials:
     importMaterials: 1
     materialName: 0
@@ -64,7 +76,7 @@ ModelImporter:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     optimizeGameObjects: 0
-    motionNodeName: 
+    motionNodeName: <Root Transform>
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -112,13 +124,13 @@ ModelImporter:
         weight: 1
       - path: baseSkull/NoseCrowd
         weight: 1
-      - path: Eye_l005
-        weight: 1
       - path: Head
         weight: 1
       - path: Head/Eye_l
         weight: 1
       - path: Head/Eye_m
+        weight: 1
+      - path: Head/Eye_r
         weight: 1
       - path: Head/Ring
         weight: 1
@@ -131,7 +143,7 @@ ModelImporter:
       maskType: 0
       maskSource: {instanceID: 0}
     - serializedVersion: 16
-      name: Boss_Attack
+      name: Boss_Attack1
       takeName: Boss_withRig
       firstFrame: 0
       lastFrame: 50
@@ -140,7 +152,7 @@ ModelImporter:
       level: 0
       cycleOffset: 0
       loop: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -166,13 +178,283 @@ ModelImporter:
         weight: 1
       - path: baseSkull/NoseCrowd
         weight: 1
-      - path: Eye_l005
+      - path: Head
+        weight: 1
+      - path: Head/Eye_l
+        weight: 1
+      - path: Head/Eye_m
+        weight: 1
+      - path: Head/Eye_r
+        weight: 1
+      - path: Head/Ring
+        weight: 1
+      - path: Head/SkinEye_l
+        weight: 1
+      - path: Head/SkinEye_m
+        weight: 1
+      - path: Head/SkinEye_r
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Boss_Attack2
+      takeName: Take 001
+      firstFrame: 190
+      lastFrame: 226
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: baseSkull
+        weight: 1
+      - path: baseSkull/ArcadeCrowd_l
+        weight: 1
+      - path: baseSkull/ArcadeCrowd_r
+        weight: 1
+      - path: baseSkull/baseMouth
+        weight: 1
+      - path: baseSkull/NoseCrowd
         weight: 1
       - path: Head
         weight: 1
       - path: Head/Eye_l
         weight: 1
       - path: Head/Eye_m
+        weight: 1
+      - path: Head/Eye_r
+        weight: 1
+      - path: Head/Ring
+        weight: 1
+      - path: Head/SkinEye_l
+        weight: 1
+      - path: Head/SkinEye_m
+        weight: 1
+      - path: Head/SkinEye_r
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Boss_Hit1
+      takeName: Take 001
+      firstFrame: 160
+      lastFrame: 175
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: baseSkull
+        weight: 1
+      - path: baseSkull/ArcadeCrowd_l
+        weight: 1
+      - path: baseSkull/ArcadeCrowd_r
+        weight: 1
+      - path: baseSkull/baseMouth
+        weight: 1
+      - path: baseSkull/NoseCrowd
+        weight: 1
+      - path: Head
+        weight: 1
+      - path: Head/Eye_l
+        weight: 1
+      - path: Head/Eye_m
+        weight: 1
+      - path: Head/Eye_r
+        weight: 1
+      - path: Head/Ring
+        weight: 1
+      - path: Head/SkinEye_l
+        weight: 1
+      - path: Head/SkinEye_m
+        weight: 1
+      - path: Head/SkinEye_r
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Boss_Hit2
+      takeName: Take 001
+      firstFrame: 175
+      lastFrame: 190
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: baseSkull
+        weight: 1
+      - path: baseSkull/ArcadeCrowd_l
+        weight: 1
+      - path: baseSkull/ArcadeCrowd_r
+        weight: 1
+      - path: baseSkull/baseMouth
+        weight: 1
+      - path: baseSkull/NoseCrowd
+        weight: 1
+      - path: Head
+        weight: 1
+      - path: Head/Eye_l
+        weight: 1
+      - path: Head/Eye_m
+        weight: 1
+      - path: Head/Eye_r
+        weight: 1
+      - path: Head/Ring
+        weight: 1
+      - path: Head/SkinEye_l
+        weight: 1
+      - path: Head/SkinEye_m
+        weight: 1
+      - path: Head/SkinEye_r
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Boss_Attack3
+      takeName: Take 001
+      firstFrame: 226
+      lastFrame: 360
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: baseSkull
+        weight: 1
+      - path: baseSkull/ArcadeCrowd_l
+        weight: 1
+      - path: baseSkull/ArcadeCrowd_r
+        weight: 1
+      - path: baseSkull/baseMouth
+        weight: 1
+      - path: baseSkull/NoseCrowd
+        weight: 1
+      - path: Head
+        weight: 1
+      - path: Head/Eye_l
+        weight: 1
+      - path: Head/Eye_m
+        weight: 1
+      - path: Head/Eye_r
+        weight: 1
+      - path: Head/Ring
+        weight: 1
+      - path: Head/SkinEye_l
+        weight: 1
+      - path: Head/SkinEye_m
+        weight: 1
+      - path: Head/SkinEye_r
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Boss_Death
+      takeName: Take 001
+      firstFrame: 360
+      lastFrame: 634
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: baseSkull
+        weight: 1
+      - path: baseSkull/ArcadeCrowd_l
+        weight: 1
+      - path: baseSkull/ArcadeCrowd_r
+        weight: 1
+      - path: baseSkull/baseMouth
+        weight: 1
+      - path: baseSkull/NoseCrowd
+        weight: 1
+      - path: Head
+        weight: 1
+      - path: Head/Eye_l
+        weight: 1
+      - path: Head/Eye_m
+        weight: 1
+      - path: Head/Eye_r
         weight: 1
       - path: Head/Ring
         weight: 1
