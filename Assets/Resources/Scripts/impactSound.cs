@@ -9,14 +9,15 @@ public class impactSound : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		SourceSFx = this.GetComponent<AudioSource> ();
+		SourceSFx.clip = HitSFx [Random.Range (0, nHitSound)];
+		SourceSFx.Play ();
 		StartCoroutine (PlayAndDestroy());
 	}
 
 
 	IEnumerator PlayAndDestroy()
 	{					
-		SourceSFx.clip = HitSFx [Random.Range (0, nHitSound)];
-		SourceSFx.Play ();
 		yield return new WaitForSeconds(SourceSFx.clip.length);
 		Destroy (this.gameObject);
 	}

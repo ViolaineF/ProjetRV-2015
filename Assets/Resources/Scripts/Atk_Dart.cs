@@ -2,20 +2,18 @@
 using System.Collections;
 
 public class Atk_Dart : MonoBehaviour {
-	public AudioClip[] LaunchSFx;
+	public AudioClip[] launchSFx;
 	public int nLaunchSound;
 	AudioSource SourceSFx;
 	int power = 10;
-	GameObject impactSound;
+	public GameObject impactSound;
 	// Use this for initialization
 	void Start () {
 
 		SourceSFx = this.GetComponent<AudioSource> () ;
-		SourceSFx.clip = LaunchSFx [Random.Range (0, nLaunchSound)];
+		SourceSFx.clip = launchSFx [Random.Range (0, nLaunchSound)];
 		SourceSFx.Play ();
-
-		impactSound = Instantiate(Resources.Load("impactSound", typeof(GameObject))) as GameObject;
-		impactSound = Resources.Load("Dart") as GameObject;
+		
 		StartCoroutine (timerDestroy());
 	}
 
@@ -32,6 +30,11 @@ public class Atk_Dart : MonoBehaviour {
 		else if(col.gameObject.tag == "Boss")
 		{
 			col.gameObject.GetComponent<BossIA>().LooseLife(power);
+			impactSound = Instantiate(impactSound, transform.position, transform.rotation) as GameObject;
+			Destroy (this.gameObject);
+		}
+		else
+		{
 			impactSound = Instantiate(impactSound, transform.position, transform.rotation) as GameObject;
 			Destroy (this.gameObject);
 		}
