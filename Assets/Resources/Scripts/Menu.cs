@@ -6,6 +6,12 @@ public class Menu : MonoBehaviour {
 	public AudioClip NewGameSFx;
 	public AudioClip QuitSFx;
 	public AudioClip PauseSFx;
+	public GameObject skillWind01;
+	public GameObject skillWind02;
+	public GameObject skillWind03;
+	public GameObject skillWind04;
+	public GameObject skillWind05;
+	public GameObject Player;
 	AudioSource SourceSFx;
 
 
@@ -14,6 +20,7 @@ public class Menu : MonoBehaviour {
 		SourceSFx = this.GetComponent<AudioSource> () ;
 		SourceSFx.clip = PauseSFx;
 		SourceSFx.Play ();
+
 	}
 
 	public void PauseGame () {
@@ -28,28 +35,43 @@ public class Menu : MonoBehaviour {
 			Time.timeScale = 1;
 			SourceSFx.clip = PauseSFx;
 			SourceSFx.Play ();
+			this.gameObject.SetActive (false);
 		}
 	}
 	
 	public void StartGame () {
-		Application.LoadLevel(1);
 		SourceSFx.clip = PauseSFx;
 		SourceSFx.Play ();
-		StartCoroutine (PlayAndDisable());
+		Application.LoadLevel(1);
 	}
 
 	public void QuitGame () {
-		StartCoroutine (PlayAndDisable());
+		this.gameObject.SetActive (false);
 		Application.Quit();
 	}
 	
-
-
-	IEnumerator PlayAndDisable()
-	{					
-		yield return new WaitForSeconds(SourceSFx.clip.length);
+	public void UpgradeSkill_1 () {
 		this.gameObject.SetActive (false);
+		Application.Quit();
 	}
 
+	public void UpgradeSkill_2 () {
+		this.gameObject.SetActive (false);
+		Application.Quit();
+	}
 
+	public void UpgradeSkill_3 () {
+		this.gameObject.SetActive (false);
+		Application.Quit();
+	}
+
+	public void UnlockSkill_3 () {
+		this.gameObject.SetActive (false);
+		Application.Quit();
+	}
+
+	public void UnlockSkill_4 () {
+		this.gameObject.SetActive (false);
+		Application.Quit();
+	}
 }

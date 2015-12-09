@@ -47,6 +47,7 @@ public class Hero_1 : MonoBehaviour
 	float LifeSafetyCooldown;
 
 	// Player stats
+	public int m_Xp; // Experience amount
 	public int m_Defense; // Defense amount
 	public int m_PVmax; // life max
 	public int m_PV; // life amount

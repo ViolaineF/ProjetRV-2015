@@ -25,7 +25,6 @@ public class Bonus : MonoBehaviour {
 			rend.material.color = new Color32(50, 200, 40, 20); //	wood color
 		}
 
-
 	}
 
 	void OnTriggerEnter (Collider col)
@@ -48,6 +47,11 @@ public class Bonus : MonoBehaviour {
 			else if(BonusType == 3) //	Strenght bonus
 			{
 				playerScript.m_Defense = playerScript.m_Defense + BonusPoint;
+			}
+
+			else if(BonusType == 4) //	Strenght bonus
+			{
+				playerScript.m_Xp = playerScript.m_Xp + BonusPoint;
 			}
 
 			Rigidbody clone;
