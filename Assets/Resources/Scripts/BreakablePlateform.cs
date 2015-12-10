@@ -21,5 +21,4 @@ public class BreakablePlateform : MonoBehaviour {
 		p_RigidB_3.AddForce (Vector3.down * 1);
 		p_RigidB_3.isKinematic = false;
 	}
-
 }
