@@ -18,6 +18,7 @@ public class Hero_1 : MonoBehaviour
 	public AudioClip fx_Dead;
 	public AudioClip fx_atk1;
 	public AudioClip fx_atk2;
+	public AudioClip fx_atk3;
 	public GameObject m_Attack1_sp_simple;
 	public GameObject m_Attack1_sp_target;
 	public GameObject m_Attack2_sp;
@@ -39,6 +40,10 @@ public class Hero_1 : MonoBehaviour
 	Vector3 m_CapsuleCenter;
 	CapsuleCollider m_Capsule;
 
+	public bool m_Atk_2_unlocked;
+	public bool m_Atk_3_unlocked;
+	public bool m_DefPos_unlocked;
+
 	bool m_Crouching;
 	bool m_Attacking_1;
 	bool m_Attacking_2;
@@ -49,10 +54,18 @@ public class Hero_1 : MonoBehaviour
 	// Player stats
 	public int m_Xp; // Experience amount
 	public int m_Defense; // Defense amount
+	public int m_DefenseInPos; // Defense amount while in defense position
 	public int m_PVmax; // life max
 	public int m_PV; // life amount
 	public int m_Strenght; // Strenght amount
+	public int powerAtk1; // Atk1 Strenght amount
+	public int powerAtk2; // Atk2 Strenght amount
+	public int powerAtk3; // Atk3 Strenght amount
+
 	public int m_Speed;  
+	int prev_m_Defense;
+
+	public float m_DefJumpPower;
 	public float m_Atk1_stam; // stamina of attack_1
 	public float m_Atk2_stam; // stamina of attack_2
 	public float m_Atk3_stam; // stamina of attack_3
@@ -94,10 +107,15 @@ public class Hero_1 : MonoBehaviour
 		m_PV = 100;
 		m_Strenght = 5;
 		m_Defense = 2;
+		m_DefenseInPos = m_Defense + 1;
 		m_Atk1_stam = 9;            
 		m_Atk2_stam = 9;               
 		m_Atk3_stam = 9;               
 		m_Post_stam = 4;
+
+		m_Atk_2_unlocked = false;
+		m_Atk_3_unlocked = false;
+		m_DefPos_unlocked = false;
 	}
 
 	void Update()
@@ -157,14 +175,25 @@ public class Hero_1 : MonoBehaviour
 			if (m_Attacking_1 && m_Atk1_stam >= 1) {
 				AttackCommand_1 ();
 			}
-			if (m_Attacking_2 && m_Atk2_stam >= 5) {
+			if (m_Atk_2_unlocked && m_Attacking_2 && m_Atk2_stam >= 5) {
 				AttackCommand_2 ();
 			}
-			if (m_Attacking_3 && m_Atk3_stam >= 9) {
+			if (m_Atk_3_unlocked && m_Attacking_3 && m_Atk3_stam >= 9) {
 				m_Attacking_3= true;
 				AttackCommand_3 ();
 			}
+			if (m_DefPos_unlocked && m_Def_Posture)
+			{
+				prev_m_Defense = m_Defense;
+				m_Defense = m_Defense + 1;
+				m_DefJumpPower = m_JumpPower + 5.0f;
 
+				Def_Command ();
+			}
+			else
+			{
+				m_Defense = prev_m_Defense;
+			}
 		// control and velocity handling is different when grounded and airborne:
 			if (m_IsGrounded) {
 				HandleGroundedMovement (crouch, jump);
@@ -254,6 +283,25 @@ public class Hero_1 : MonoBehaviour
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public void UpdatePowerAtk1()
+	{
+		powerAtk1 = powerAtk1 + 5;
+	}
+
+	public void UpdatePowerAtk2()
+	{
+		powerAtk2 = powerAtk2 + 5;
+	}
+
+	public void UpdatePowerAtk3()
+	{
+		powerAtk3 = powerAtk3 + 5;
+	}
+	
+	public void UpdateDefPos()
+	{
+		m_DefenseInPos = m_DefenseInPos + 4;
+	}
 
 	void AttackCommand_1()
 	{			
@@ -289,12 +337,28 @@ public class Hero_1 : MonoBehaviour
 				clone = Instantiate(m_Dart, m_Attack1_sp_simple.transform.position, m_Attack1_sp_simple.transform.rotation) as Rigidbody;
 				clone.velocity = m_Attack1_sp_simple.transform.TransformDirection(Vector3.forward * 10);
 			}
-
 			StartCoroutine(PlaySFx(fx_atk1));
 
 		}
 	}
 
+	public int CheckAtk1pow()
+	{
+		int p = m_Strenght + powerAtk1;
+		return p;
+	}
+
+	public int CheckAtk2pow()
+	{
+		int p = m_Strenght + powerAtk2;
+		return p;
+	}
+
+	public int CheckAtk3pow()
+	{
+		int p = m_Strenght + powerAtk3;
+		return p;
+	}
 
 	void AttackCommand_2()
 	{
@@ -326,6 +390,12 @@ public class Hero_1 : MonoBehaviour
 		}
 	}
 
+	void Def_Command()
+	{
+
+
+	}
+
 	void UpdateAnimator(Vector3 move)
 	{
 		// update the animator parameters
@@ -335,9 +405,12 @@ public class Hero_1 : MonoBehaviour
 		m_Animator.SetBool("OnGround", m_IsGrounded);
 
 		m_Animator.SetBool("Attack01", m_Attacking_1);
-		m_Animator.SetBool("Attack02", m_Attacking_2);
-		m_Animator.SetBool("Attack03", m_Attacking_3);
-		m_Animator.SetBool("Posture", m_Def_Posture);
+		if (m_Atk_2_unlocked == true)
+			m_Animator.SetBool("Attack02", m_Attacking_2);
+		if (m_Atk_3_unlocked == true)
+			m_Animator.SetBool("Attack03", m_Attacking_3);
+		if (m_DefPos_unlocked == true)
+			m_Animator.SetBool("Posture", m_Def_Posture);
 
 		if (!m_IsGrounded)
 		{

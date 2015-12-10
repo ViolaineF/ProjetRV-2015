@@ -5,16 +5,21 @@ public class Atk_Dart : MonoBehaviour {
 	public AudioClip[] launchSFx;
 	public int nLaunchSound;
 	AudioSource SourceSFx;
-	int power = 10;
+	public int power;
 	public GameObject impactSound;
-	// Use this for initialization
+	GameObject player;
+
 	void Start () {
+
+		player = GameObject.FindGameObjectWithTag("Player").gameObject;
+		power = player.GetComponent<Hero_1> ().CheckAtk1pow();
 
 		SourceSFx = this.GetComponent<AudioSource> () ;
 		SourceSFx.clip = launchSFx [Random.Range (0, nLaunchSound)];
 		SourceSFx.Play ();
 		
 		StartCoroutine (timerDestroy());
+
 	}
 
 
@@ -40,6 +45,7 @@ public class Atk_Dart : MonoBehaviour {
 		}
 
 	}
+
 
 	IEnumerator timerDestroy()
 	{			

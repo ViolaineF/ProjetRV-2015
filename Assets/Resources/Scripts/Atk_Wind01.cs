@@ -3,11 +3,12 @@ using System.Collections;
 
 public class Atk_Wind01 : MonoBehaviour {
 
-	int power = 10;
+	public int power = 10;
 	public AudioClip[] SFx;
 	public int Nsound;
 	AudioSource SourceSFx;
 	private Enemy01 ennemy01;
+	GameObject player;
 
 	void Start () {
 
@@ -17,9 +18,8 @@ public class Atk_Wind01 : MonoBehaviour {
 
 		StartCoroutine (timerDestroy());
 
-		GameObject thePlayer = GameObject.Find("Hero1");
-		Hero_1 playerScript = thePlayer.GetComponent<Hero_1>();
-		power = playerScript.m_Strenght;
+		player = GameObject.FindGameObjectWithTag("Player").gameObject;
+		power = player.GetComponent<Hero_1> ().CheckAtk2pow();
 	}
 	
 	
@@ -42,6 +42,10 @@ public class Atk_Wind01 : MonoBehaviour {
 		this.transform.TransformDirection(Vector3.forward * 10);
 	}
 
+	public void UpgradeAttack () {
+		
+		power = power + 12;
+	}
 
 	IEnumerator timerDestroy()
 	{

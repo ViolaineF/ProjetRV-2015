@@ -6,12 +6,15 @@ public class Menu : MonoBehaviour {
 	public AudioClip NewGameSFx;
 	public AudioClip QuitSFx;
 	public AudioClip PauseSFx;
+	private Hero_1 m_Character; // A reference to the ThirdPersonCharacter on the object
+
+	public GameObject Player;
+
 	public GameObject skillWind01;
 	public GameObject skillWind02;
 	public GameObject skillWind03;
 	public GameObject skillWind04;
 	public GameObject skillWind05;
-	public GameObject Player;
 	AudioSource SourceSFx;
 
 
@@ -20,7 +23,7 @@ public class Menu : MonoBehaviour {
 		SourceSFx = this.GetComponent<AudioSource> () ;
 		SourceSFx.clip = PauseSFx;
 		SourceSFx.Play ();
-
+		m_Character = Player.GetComponent<Hero_1>();
 	}
 
 	public void PauseGame () {
@@ -51,27 +54,34 @@ public class Menu : MonoBehaviour {
 	}
 	
 	public void UpgradeSkill_1 () {
-		this.gameObject.SetActive (false);
-		Application.Quit();
+		Player.GetComponent<Hero_1> ().UpdatePowerAtk1();
 	}
 
 	public void UpgradeSkill_2 () {
-		this.gameObject.SetActive (false);
-		Application.Quit();
+
+		Player.GetComponent<Hero_1> ().UpdatePowerAtk2();
 	}
 
 	public void UpgradeSkill_3 () {
-		this.gameObject.SetActive (false);
-		Application.Quit();
+
+		Player.GetComponent<Hero_1> ().UpdatePowerAtk3();
 	}
+
+	public void UpgradeDefPos () {
+		
+		Player.GetComponent<Hero_1> ().UpdateDefPos();
+	}
+
+	public void UnlockSkill_2 () {
+		m_Character.m_Atk_2_unlocked = true;
+	}	
 
 	public void UnlockSkill_3 () {
-		this.gameObject.SetActive (false);
-		Application.Quit();
+		m_Character.m_Atk_3_unlocked = true;
 	}
 
-	public void UnlockSkill_4 () {
-		this.gameObject.SetActive (false);
-		Application.Quit();
+	public void UnlockDefPos () {
+		m_Character.m_DefPos_unlocked = true;
 	}
+
 }
