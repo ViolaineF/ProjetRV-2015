@@ -35,6 +35,17 @@ public class Atk_Wind01 : MonoBehaviour {
 
 //			otherObject.GetComponent<ThisHasABoolean>().onOrOff = true;
 		}
+
+		if(col.gameObject.tag == "Boss")
+		{
+			Rigidbody body = col.gameObject.GetComponent<Rigidbody>();
+			
+			col.gameObject.GetComponent<Enemy01>().Levitate();
+			col.gameObject.GetComponent<Enemy01>().LooseLife(power);
+			SourceSFx.clip = SFx [5];
+			
+			//			otherObject.GetComponent<ThisHasABoolean>().onOrOff = true;
+		}
 	}
 
 	void Update ()
