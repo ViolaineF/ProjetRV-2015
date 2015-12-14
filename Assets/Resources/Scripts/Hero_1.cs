@@ -358,7 +358,7 @@ public class Hero_1 : MonoBehaviour
 				// instantiate a projectile forward
 
 				clone = Instantiate(m_Dart, m_Attack1_sp_simple.transform.position, m_Attack1_sp_simple.transform.rotation) as Rigidbody;
-				clone.velocity = m_Attack1_sp_simple.transform.TransformDirection(Vector3.forward * 10);
+				clone.velocity = m_Attack1_sp_simple.transform.TransformDirection(Vector3.forward * 3);
 			}
 			StartCoroutine(PlaySFx(fx_atk1));
 		}
@@ -391,7 +391,7 @@ public class Hero_1 : MonoBehaviour
 			Rigidbody clone;
 			clone = Instantiate(m_SkillWood02, m_AtkWood02_sp.transform.position, m_AtkWood02_sp.transform.rotation) as Rigidbody;
 
-			clone.velocity = m_AtkWood02_sp.transform.TransformDirection(Vector3.forward * 10 + Vector3.down * 3);
+			clone.velocity = m_AtkWood02_sp.transform.TransformDirection(Vector3.forward * 6 + Vector3.down * 3);
 		}
 	}
 

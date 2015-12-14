@@ -9,12 +9,7 @@ public class Menu : MonoBehaviour {
 	private Hero_1 m_Character; // A reference to the ThirdPersonCharacter on the object
 
 	public GameObject Player;
-
-	public GameObject skillWind01;
-	public GameObject skillWind02;
-	public GameObject skillWind03;
-	public GameObject skillWind04;
-	public GameObject skillWind05;
+	
 	AudioSource SourceSFx;
 
 
