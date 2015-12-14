@@ -22,12 +22,13 @@ public class Hero_1 : MonoBehaviour
 	public GameObject m_Attack1_sp_simple;
 	public GameObject m_Attack1_sp_target;
 	public GameObject m_Attack2_sp;
-	public GameObject m_Attack3_sp;
+	public GameObject m_AtkWood02_sp;
 	public GameObject m_HUD;
 
 	public Rigidbody m_Dart;
 	public Rigidbody m_SkillWind01;
 	public Rigidbody m_SkillWind02;
+	public Rigidbody m_SkillWood02;
 	Rigidbody m_Rigidbody;
 	Animator m_Animator;
 	bool m_IsGrounded;
@@ -384,15 +385,23 @@ public class Hero_1 : MonoBehaviour
 		if (!m_Crouching)
 		{
 			Rigidbody clone;
-			clone = Instantiate(m_SkillWind02, m_Attack3_sp.transform.position, m_Attack3_sp.transform.rotation) as Rigidbody;
-			
-			clone.velocity = m_Attack3_sp.transform.TransformDirection(Vector3.forward * 10);
+			clone = Instantiate(m_SkillWood02, m_AtkWood02_sp.transform.position, m_AtkWood02_sp.transform.rotation) as Rigidbody;
+
+			clone.velocity = m_AtkWood02_sp.transform.TransformDirection(Vector3.forward * 10);
 		}
 	}
 
+
 	void Def_Command()
 	{
-
+		// prevent standing up in crouch-only zones
+		if (!m_Crouching)
+		{
+			Rigidbody clone;
+			clone = Instantiate(m_SkillWind02, m_AtkWood02_sp.transform.position, m_AtkWood02_sp.transform.rotation) as Rigidbody;
+			
+			clone.velocity = m_AtkWood02_sp.transform.TransformDirection(Vector3.forward * 4);
+		}
 
 	}
 
