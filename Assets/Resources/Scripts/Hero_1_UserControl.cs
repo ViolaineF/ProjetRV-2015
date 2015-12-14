@@ -65,10 +65,11 @@ public class Hero_1_UserControl : MonoBehaviour
 						//						StartCoroutine (FadeSelection());
 					}
 					target = rcHit.transform;
-					Debug.Log (target.name);
 				}
 			}
 		}
+
+
 		if (!m_Jump)
 		{
 			m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");

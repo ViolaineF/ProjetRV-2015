@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 42a714339a7eef74fb7317c73111024c
-timeCreated: 1449744907
+guid: d3a9aa8a426ba064e91e0a1bae3b2711
+timeCreated: 1450089695
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -9,8 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: BigBrick001
-    6400000: //RootNode
+    4300000: RuneStoneTotem_02
   materials:
     importMaterials: 1
     materialName: 0
@@ -34,9 +33,9 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: .200000003
+    globalScale: 9
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0

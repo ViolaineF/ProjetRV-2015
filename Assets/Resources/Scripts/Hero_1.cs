@@ -304,6 +304,28 @@ public class Hero_1 : MonoBehaviour
 		m_DefenseInPos = m_DefenseInPos + 4;
 	}
 
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// 
+	public int CheckAtk1pow()
+	{
+		int p = m_Strenght + powerAtk1;
+		return p;
+	}
+	
+	public int CheckAtk2pow()
+	{
+		int p = m_Strenght + powerAtk2;
+		return p;
+	}
+	
+	public int CheckAtk3pow()
+	{
+		int p = m_Strenght + powerAtk3;
+		return p;
+	}
+
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	void AttackCommand_1()
 	{			
 		if (!m_Crouching && m_TimerAtk >= 0.5f)
@@ -339,27 +361,9 @@ public class Hero_1 : MonoBehaviour
 				clone.velocity = m_Attack1_sp_simple.transform.TransformDirection(Vector3.forward * 10);
 			}
 			StartCoroutine(PlaySFx(fx_atk1));
-
 		}
 	}
 
-	public int CheckAtk1pow()
-	{
-		int p = m_Strenght + powerAtk1;
-		return p;
-	}
-
-	public int CheckAtk2pow()
-	{
-		int p = m_Strenght + powerAtk2;
-		return p;
-	}
-
-	public int CheckAtk3pow()
-	{
-		int p = m_Strenght + powerAtk3;
-		return p;
-	}
 
 	void AttackCommand_2()
 	{
@@ -375,9 +379,9 @@ public class Hero_1 : MonoBehaviour
 			clone.velocity = m_Attack2_sp.transform.TransformDirection(Vector3.forward * 10);
 
 			StartCoroutine(PlaySFx(fx_atk2));
-
 		}
 	}
+
 
 	void AttackCommand_3()
 	{
@@ -387,7 +391,7 @@ public class Hero_1 : MonoBehaviour
 			Rigidbody clone;
 			clone = Instantiate(m_SkillWood02, m_AtkWood02_sp.transform.position, m_AtkWood02_sp.transform.rotation) as Rigidbody;
 
-			clone.velocity = m_AtkWood02_sp.transform.TransformDirection(Vector3.forward * 10);
+			clone.velocity = m_AtkWood02_sp.transform.TransformDirection(Vector3.forward * 10 + Vector3.down * 3);
 		}
 	}
 
@@ -404,6 +408,9 @@ public class Hero_1 : MonoBehaviour
 		}
 
 	}
+
+
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	void UpdateAnimator(Vector3 move)
 	{
@@ -531,6 +538,7 @@ public class Hero_1 : MonoBehaviour
 		}
 	}
 
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// coroutines //
 
@@ -548,29 +556,6 @@ public class Hero_1 : MonoBehaviour
 		PlayerSFx.Play();
 		yield return new WaitForSeconds(PlayerSFx.clip.length);
 	}
-
-	/*
-	void OnCollisionEnter (Collision col)
-	{
-		if(col.gameObject.tag == "Ground")
-		{
-			m_IsGrounded = true;
-			m_Animator.applyRootMotion = true;
-			PlayerSFx.clip = FootStep;
-			if(!PlayerSFx.isPlaying)
-			{
-				PlayerSFx.Play();
-			}	
-		}
-		else
-		{
-			m_IsGrounded = false;
-			m_GroundNormal = Vector3.up;
-			m_Animator.applyRootMotion = false;
-		}
-
-	}
-	*/
-
 }
+
 

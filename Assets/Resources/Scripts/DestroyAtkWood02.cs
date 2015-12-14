@@ -7,25 +7,28 @@ public class DestroyAtkWood02 : MonoBehaviour {
 	public float delay02;
 	Rigidbody rBody;
 	ParticleSystem pEmitter;
+	private RaycastHit rcHit;
 
 	void Start () {
 		StartCoroutine (timerDestroy());
 		rBody = this.GetComponent<Rigidbody>();
 		pEmitter = this.GetComponent<ParticleSystem>();
+		pEmitter.emissionRate = 0;
+
 	}
 
-	void OnCollisionStay (Collision col)
+	void OnCollisionEnter(Collision col)
 	{
 		if(col.gameObject.tag == "Ground")
 		{
 			pEmitter.emissionRate = 1;
 		}
-		
 		else
 		{
 			pEmitter.emissionRate = 0;
 		}
 	}
+
 
 	IEnumerator timerDestroy()
 	{			
